@@ -1,4 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
-
-module.exports = nextConfig
+module.exports = {
+  images: {
+    loader: "custom",
+    loaderFile: "/app/utils/imageKitLoader.js",
+  },
+};
