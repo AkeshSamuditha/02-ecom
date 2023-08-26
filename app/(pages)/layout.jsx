@@ -7,7 +7,7 @@ import CartContextProvider from "@app/contexts/cartContext";
 const sans = Josefin_Sans({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "dress",
+  title: "Pulse",
   description: "Find the perfect dress for your next occasion.",
 };
 
