@@ -8,12 +8,15 @@ const TrendingCard = ({ product }) => {
     <>
       <Link
         href={`/products/${product.id}`}
-        className="flex flex-col    px-4 py-2 rounded-xl  bg-black/[.02] cursor-pointer gap-3 "
+        className="flex flex-col   px-4 py-2 rounded-xl  bg-black/[.02] cursor-pointer gap-3 "
       >
         <div className="flex justify-between gap-3 xs:flex-wrap xs:justify-center sm:flex-nowrap sm:justify-between">
           <div>
             <h1 className="text-xl xs:text-base sm:text-xl font-bold">
               {product.name}
+              {/* <p className="text-gray-600 text-sm text-end">
+                {product.category}
+              </p> */}
             </h1>
           </div>
           <div className="flex flex-col items-start ">
@@ -21,15 +24,14 @@ const TrendingCard = ({ product }) => {
               <h1 className=" text-lg xs:text-base sm:text-lg font-bold">
                 Rs.{product.price}
               </h1>
-              <button className="p-0.5 custom-bg-gradient rounded-md ms-2">
+              {/* <button className="p-0.5 custom-bg-gradient rounded-md ms-2">
                 {product.inCart ? (
                   <AiOutlineCheck className="text-white font-bold text-sm" />
                 ) : (
                   <AiOutlinePlus className="text-white font-bold text-sm" />
                 )}
-              </button>
+              </button> */}
             </div>
-            <p className="text-gray-600 text-sm text-end">{product.category}</p>
           </div>
         </div>
         <div className="flex justify-center items-center w-full h-full">
@@ -38,7 +40,6 @@ const TrendingCard = ({ product }) => {
             alt={product.name}
             height={200}
             width={250}
-            // quality={100}
             className="rounded-xl w-40 h-60 xs:w-50 xs:h-75 sm:w-60 sm:h-90 py-2 object-cover hover:scale-110 transition"
           />
         </div>
