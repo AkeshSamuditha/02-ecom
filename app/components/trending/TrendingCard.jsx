@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import imageKitLoader from "../../utils/imageKitLoader";
 
 import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 
@@ -9,7 +8,7 @@ const TrendingCard = ({ product }) => {
     <>
       <Link
         href={`/products/${product.id}`}
-        className="flex flex-col    px-4 py-2 rounded-xl  bg-black/[.06] cursor-pointer gap-3 "
+        className="flex flex-col    px-4 py-2 rounded-xl  bg-black/[.02] cursor-pointer gap-3 "
       >
         <div className="flex justify-between gap-3 xs:flex-wrap xs:justify-center sm:flex-nowrap sm:justify-between">
           <div>
@@ -23,7 +22,7 @@ const TrendingCard = ({ product }) => {
                 Rs.{product.price}
               </h1>
               <button className="p-0.5 custom-bg-gradient rounded-md ms-2">
-                {false ? ( //product.inCart
+                {product.inCart ? (
                   <AiOutlineCheck className="text-white font-bold text-sm" />
                 ) : (
                   <AiOutlinePlus className="text-white font-bold text-sm" />
@@ -35,12 +34,11 @@ const TrendingCard = ({ product }) => {
         </div>
         <div className="flex justify-center items-center w-full h-full">
           <Image
-            loader={imageKitLoader}
             src={product.image}
             alt={product.name}
-            height={1000}
-            width={1000}
-            className="w-40 h-60 xs:w-50 xs:h-75 sm:w-60 sm:h-90 py-2 object-cover hover:scale-110 transition"
+            height={120}
+            width={100}
+            className="rounded-xl w-40 h-60 xs:w-50 xs:h-75 sm:w-60 sm:h-90 py-2 object-cover hover:scale-110 transition"
           />
         </div>
       </Link>

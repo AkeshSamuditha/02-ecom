@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "devStart": "nodemon prisma/seed.js",
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
