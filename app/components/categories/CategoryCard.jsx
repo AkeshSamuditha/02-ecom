@@ -30,7 +30,7 @@ const CategoryCard = ({ category }) => {
              flex flex-col w-full h-full justify-center items-center
             transition-all delay-75 absolute left-0 right-0 bottom-0 top-0 bg-black/[0.3] rounded-xl"
       >
-        <h1 className="text-4xl xs:text-3xl sm:text-3xl lg:text-3xl font-extrabold capitalize text-[--theme-color] shadow-sm p-3 break-all">
+        <h1 className="text-4xl xs:text-3xl sm:text-6xl lg:text-7xl font-extrabold capitalize text-[--theme-color] shadow-sm p-3 break-all">
           {category.name}
         </h1>
       </div>

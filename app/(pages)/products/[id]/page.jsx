@@ -1,6 +1,10 @@
 "use client";
 import { usePathname, useRouter, useParams } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTag } from "@fortawesome/free-solid-svg-icons";
+
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { BsBookmarkHeart, BsFillBookmarkHeartFill } from "react-icons/bs";
 import Image from "next/image";
@@ -26,126 +30,94 @@ const ProductDetails = () => {
   //   useWishlistContext();
   // const [loading, setLoading] = useState(false);
   const product = getProductById(productId.id);
+  // const [product, setProduct] = useState(null);
   // useEffect(() => {
-
-  //   (async () => {
-  //     setLoading(true);
+  //   console.log(productId);
+  //   const getProduct = async () => {
   //     try {
-  //       const response = await getProductByIdService(productId);
-  //       // console.log(response);
-  //     } catch (err) {
-  //       console.log(err);
-  //     } finally {
-  //       setLoading(false);
+  //       const response = await fetch(`/api/products/${productId}`, {
+  //         method: "GET",
+  //       });
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch data");
+  //       }
+  //       const product = await response.json();
+  //       console.log(product);
+  //       setProduct(product);
+  //       return;
+  //     } catch (error) {
+  //       return new Error(error);
   //     }
-  //   })();
-  // }, [allProducts, productId]);
+  //   };
+  //   getProduct();
+  // }, [productId]);
 
   return (
-    <div className="md:min-h-[80vh] flex justify-center items-center pt-5 sm:pt-3 pb-2 relative">
-      <main className="grid grid-rows-1 sm:grid-cols-2 gap-2 sm:gap-10 ">
-        <section className="relative p-7  flex items-center justify-center rounded-lg">
+    <div className="min-h-screen flex justify-center items-center px-4 py-8 bg-gray-100">
+      <main className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-16 max-w-screen-xl">
+        <section className="p-6 sm:p-8 rounded-lg shadow-md flex items-center justify-center b">
           <Image
             loader={imageKitLoader}
             src={product.image}
             alt="Sample image"
             width={400}
             height={600}
-            className="rounded-xl w-full h-full object-cover xs:object-contain sm:object-contain "
+            className="rounded-xl w-full h-full object-cover transition-transform hover:scale-110"
           />
         </section>
-
-        <section className="p-7 px-10 rounded-md shadow-sm bg-white/[0.7] flex flex-col gap-3 sm:gap-5 ">
+        <section className="p-6 sm:p-8 bg-white bg-opacity-70 rounded-md shadow-md flex flex-col gap-6 justify-center">
           <div className="flex flex-col gap-2">
-            <h1 className=" text-2xl sm:text-4xl font-bold">{product?.name}</h1>
-            <p className=" text-gray-600 text-sm sm:text-base">
-              {product?.description}
-            </p>
-            {/* <div className="flex items-center gap-1">
-              { <StarRating /> }
-
-              <span className="text-xs text-gray-400">
-                ({product?.rating}) Rating
+            <h1 className="text-4xl sm:text-5xl font-bold text-center  uppercase tracking-wide">
+              {product?.name}
+            </h1>
+            <br />
+            <h2 className="text-xl sm:text-2xl font-semibold text-left relative">
+              <span className="hover:scale-95 underline transition">
+                About Product
               </span>
-            </div> */}
+            </h2>
+            <p className="text-gray-600 text-xl ">{product?.description}</p>
           </div>
-
-          <div className="flex flex-col gap-2">
-            {/* <h2 className="text-lg font-semibold">About Product</h2> */}
-            <ul className="flex gap-5  flex-row">
-              <div>
-                {/* <li>
-                  <span className="text-gray-500 text-sm">Brand: </span>
-                  {product?.brand}
-                </li> */}
-                <li>
-                  <span className="text-gray-500 text-sm">Category: </span>
-                  {product?.category}
-                </li>
-
-                <li>
-                  <div className="flex">
-                    <span className="text-gray-500 text-sm">Colors: </span>
-                    {/* {product?.weight ? ( */}
-                    {true ? (
-                      <div className="flex items-center">
-                        {/* {product.weight.map((color, index) => ( */}
-                        {["#FF5733", "#33FFA0", "#3360FF"].map(
-                          (color, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                backgroundColor: color,
-                                width: "16px",
-                                height: "16px",
-                                borderRadius: "50%",
-                                margin: "0 5px",
-                              }}
-                            ></div>
-                          )
-                        )}
-                      </div>
-                    ) : (
-                      <span>No colors available</span>
-                    )}
-                  </div>
-                </li>
-              </div>
-            </ul>
-          </div>
-
-          <div className="flex gap-2 items-center pb-10 sm:pb-0">
-            Price:
-            <span className="ms-1 text-xl sm:text-xl text-amber-600">
+          <ul className="flex flex-col gap-2 items-left">
+            <li className="text-gray-500 text-lg flex items-left">
+              <FontAwesomeIcon icon={faTag} className="mr-2" />
+              {product?.category}
+            </li>
+          </ul>
+          <div className="flex items-center pb-4 sm:pb-0">
+            <span className="text-xl sm:text-2xl font-semibold text-amber-600">
               Rs. {product?.price}
             </span>
-            {/* <span className="text-sm text-gray-600 line-through">
-              Rs{product?.price}
-            </span> */}
           </div>
-
-          <div className={`w-full   flex gap-4 items-center   flex-wrap  `}>
+          <div className="w-full flex-col flex items-center justify-center">
             <button
-              className="btn-rounded-secondary flex items-center gap-2 text-sm disabled:cursor-not-allowed"
               disabled={disableCart}
+              className="btn-rounded-secondary flex items-center justify-center gap-2 text-base
+             hover:bg-amber-600 hover:text-white hover:scale-105 transform transition disabled:cursor-not-allowed"
               onClick={() => {
                 if (!token) {
                   navigate.push("/login", { state: { from: location } });
-                  notify("warn", "Please Login to continue");
+                  // notify("warn", "Please Login to continue");
+                } else if (!product?.inCart) {
+                  addProductToCart(product);
                 } else {
-                  if (!product?.inCart) {
-                    addProductToCart(product);
-                  } else {
-                    navigate.push("/cart");
-                  }
+                  navigate.push("/cart");
                 }
               }}
             >
-              <HiOutlineShoppingBag />{" "}
+              <div className="animate-pulse">
+                <HiOutlineShoppingBag className="text-xl" />
+              </div>
               {product?.inCart ? "Go to Cart" : "Add to Cart"}
             </button>
+            {product?.inCart && (
+              <div className="text-sm text-center  text-red-500 px-2 py-1">
+                Already added to cart
+              </div>
+            )}
+          </div>
 
-            {/* <button
+          {/* <button
               className="btn-rounded-primary rounded-full flex items-center gap-2 text-sm disabled:cursor-not-allowed"
               disabled={disableWish}
               onClick={() => {
@@ -161,7 +133,7 @@ const ProductDetails = () => {
                 }
               }}
             > */}
-            {/* {product?.inWish ? (
+          {/* {product?.inWish ? (
                 <>
                   <BsFillBookmarkHeartFill />
                   <span>Remove from Wishlist</span>
@@ -172,8 +144,7 @@ const ProductDetails = () => {
                   <BsBookmarkHeart /> <span>Wishlist Item</span>
                 </>
               )}{" "} */}
-            {/* </button> */}
-          </div>
+          {/* </button> */}
         </section>
       </main>
     </div>

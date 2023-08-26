@@ -9,7 +9,8 @@ export default function Error() {
       <Image
         src="404-error.gif"
         alt="error"
-        fill
+        width={400}
+        height={400}
         className="w-full xs:w-[80%] sm:w-1/2"
         quality={100}
       />
