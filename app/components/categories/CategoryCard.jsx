@@ -9,7 +9,7 @@ const CategoryCard = ({ category }) => {
   const { applyFilters } = useProductsContext();
   const [showCategory, setShowCategory] = useState(true);
   const clickHandler = () => {
-    applyFilters("categories", [category.categoryname]);
+    applyFilters("gender", category.name);
     navigate.push("/products", { state: { from: "category" } });
   };
   return (
@@ -20,7 +20,7 @@ const CategoryCard = ({ category }) => {
       <Image
         loader={imageKitLoader}
         src={category.image}
-        alt={category.categoryname}
+        alt={category.name}
         width={400}
         height={50}
         className="rounded-xl h-full w-full object-cover transition-all delay-75 ease-out"
@@ -30,7 +30,7 @@ const CategoryCard = ({ category }) => {
              flex flex-col w-full h-full justify-center items-center
             transition-all delay-75 absolute left-0 right-0 bottom-0 top-0 bg-black/[0.3] rounded-xl"
       >
-        <h1 className="text-4xl xs:text-6xl sm:text-8xl lg:text-6xl font-extrabold capitalize text-[--theme-color] shadow-sm p-3 break-all">
+        <h1 className="text-4xl xs:text-3xl sm:text-3xl lg:text-3xl font-extrabold capitalize text-[--theme-color] shadow-sm p-3 break-all">
           {category.name}
         </h1>
       </div>

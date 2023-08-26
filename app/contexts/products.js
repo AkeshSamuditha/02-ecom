@@ -75,6 +75,7 @@ export default function ProductsContextProvider({ children }) {
   };
 
   const applyFilters = (filterType, filterValue) => {
+    console.log(filterType, filterValue);
     dispatch({
       type: filterTypes.FILTERS,
       payload: { filterType, filterValue },

@@ -44,14 +44,14 @@ const ProductDetails = () => {
   return (
     <div className="md:min-h-[80vh] flex justify-center items-center pt-5 sm:pt-3 pb-2 relative">
       <main className="grid grid-rows-1 sm:grid-cols-2 gap-2 sm:gap-10 ">
-        <section className="relative p-7 bg-black/[0.075]  flex items-center justify-center rounded-lg">
+        <section className="relative p-7  flex items-center justify-center rounded-lg">
           <Image
             loader={imageKitLoader}
             src={product.image}
             alt="Sample image"
             width={400}
             height={600}
-            className="w-full h-full object-cover xs:object-contain sm:object-contain "
+            className="rounded-xl w-full h-full object-cover xs:object-contain sm:object-contain "
           />
         </section>
 

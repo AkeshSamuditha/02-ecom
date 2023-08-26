@@ -36,8 +36,9 @@ const TrendingCard = ({ product }) => {
           <Image
             src={product.image}
             alt={product.name}
-            height={120}
-            width={100}
+            height={200}
+            width={250}
+            // quality={100}
             className="rounded-xl w-40 h-60 xs:w-50 xs:h-75 sm:w-60 sm:h-90 py-2 object-cover hover:scale-110 transition"
           />
         </div>

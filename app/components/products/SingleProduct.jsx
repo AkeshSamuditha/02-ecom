@@ -43,9 +43,9 @@ const SingleProduct = ({ product }) => {
           loader={imageKitLoader}
           src={product.image}
           alt="Sample image"
-          width={400}
-          height={600}
-          className="w-full object-cover xs:object-contain sm:object-contain h-60"
+          width={150}
+          height={200}
+          className="w-full  h-full object-cover xs:object-contain sm:object-contain"
         />
       </div>
 
