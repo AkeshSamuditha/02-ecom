@@ -3,12 +3,11 @@
 import Link from "next/link";
 import React from "react";
 import Logo from "./Logo";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import LogoutButton from "./logoutButton";
 import LoginButton from "./loginButton";
-import Search from "../Search";
+import Search from "../search";
 import MenuDropdown from "./MenuDropdown";
 import { BsBookmarkHeart } from "react-icons/bs";
 import { HiOutlineShoppingBag } from "react-icons/hi";
