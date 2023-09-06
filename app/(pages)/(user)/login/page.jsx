@@ -1,10 +1,11 @@
 "use client";
-import Link from "next/link";
+import React, { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import Link from "next/link";
 
 const SignInPage = () => {
+  const searchParams = useSearchParams();
   const { data: session } = useSession();
 
   const [email, setEmail] = useState("");
@@ -13,7 +14,6 @@ const SignInPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/profile";
 
   if (session?.status === "authenticated") {
@@ -92,7 +92,7 @@ const SignInPage = () => {
                 >
                   {loading ? "Logging In..." : "Login"}
                 </button>
-                <button
+                {/* <button
                   className="btn-secondary w-2/3 text-sm md:text-base text-center"
                   onClick={() => {
                     setPassword("test");
@@ -100,7 +100,7 @@ const SignInPage = () => {
                   }}
                 >
                   Login as a Guest
-                </button>
+                </button> */}
                 <Link href="/signup" className="underline text-gray-600">
                   Create New Account
                 </Link>

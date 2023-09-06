@@ -18,8 +18,7 @@ import Link from "next/link";
 const SingleProduct = ({ product }) => {
   const location = usePathname();
   const token = useSession();
-  const { isInCart } = useProductsContext();
-  const { addProductToCart, disableCart } = useCartContext();
+  const { addProductToCart, disableCart, isInCart } = useCartContext();
   // const { addProductToWishlist, deleteProductFromWishlist, disableWish } =
   //   useWishlistContext();
   const navigate = useRouter();

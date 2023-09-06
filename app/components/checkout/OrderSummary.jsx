@@ -4,10 +4,9 @@ import AddressCard from "../address/AddressCard";
 import PriceDetailsCard from "./PriceDetailsCard";
 
 const OrderSummary = () => {
-  // const { currentAddress } = useProductsContext();
-  // const { cart, totalPriceOfCartProducts, actualPriceOfCart } =
-  //   useCartContext();
-  // const totalItems = cart.reduce((acc, { qty }) => acc + qty, 0);
+  const { currentAddress } = useProductsContext();
+  const { cart, totalPriceOfCart } = useCartContext();
+  const totalItems = cart.reduce((acc, { qty }) => acc + qty, 0);
   return (
     <div className="px-7  rounded-md shadow-sm bg-gray-50 flex flex-col gap-2 min-w-[25rem] w-full h-min">
       <h1 className="text-sm font-semibold text-gray-700 ms-4">Address</h1>
@@ -15,13 +14,13 @@ const OrderSummary = () => {
       <hr /> Price Details
       {/* <PriceDetailsCard
         totalItems={totalItems}
-        actualPriceOfCart={actualPriceOfCart}
+        totalPriceOfCart={totalPriceOfCart}
         totalPriceOfCartProducts={totalPriceOfCartProducts}
       /> */}
       <hr />
       <div className="flex justify-between items-center">
         <p className=" text-gray-600">Total</p>
-        <p className="text-2xl">₹{totalPriceOfCartProducts}</p>
+        <p className="text-2xl">₹{totalPriceOfCart}</p>
       </div>
     </div>
   );

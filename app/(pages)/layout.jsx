@@ -4,6 +4,11 @@ import "../styles/globals.css";
 import AuthProvider from "../components/providers/AuthProvider";
 import ProductsProvider from "../contexts/products";
 import CartContextProvider from "@app/contexts/cartContext";
+
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
+
 const sans = Josefin_Sans({ subsets: ["latin"] });
 
 export const metadata = {

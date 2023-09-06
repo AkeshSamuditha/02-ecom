@@ -5,55 +5,47 @@ import { initialState, productsReducer } from "../reducers/productsReducer";
 import { actionTypes, addressTypes, filterTypes } from "../utils/actiontypes";
 import ProductProvider from "/app/components/providers/productsProvider.jsx";
 import { useSession } from "next-auth/react";
+import { getProducts, getcategories } from "@app/actions/serverActions";
 
 export default function ProductsContextProvider({ children }) {
-  const { data: session } = useSession();
   const [state, dispatch] = useReducer(productsReducer, initialState);
-  const [currentAddress, setCurrentAddress] = useState(state.addressList[0]);
+
+  const [addressList, setAddressList] = useState([]);
+  const [currentAddress, setCurrentAddress] = useState(addressList[0]);
   const [isOrderPlaced, setisOrderPlaced] = useState(false);
+  const [loadingProducts, setLoadingProducts] = useState(false);
 
   useEffect(() => {
-    try {
-      const getProducts = async () => {
-        const response = await fetch("/api/products", {
-          method: "GET",
-        });
+    setLoadingProducts(true);
+    (async () => {
+      const products = await getProducts();
 
-        const products = await response.json();
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        dispatch({
-          type: actionTypes.INITIALIZE_PRODUCTS,
-          payload: JSON.parse(products),
-        });
-      };
-      const getCategories = async () => {
-        const response = await fetch("/api/categories", {
-          method: "GET",
-        });
+      dispatch({
+        type: actionTypes.INITIALIZE_PRODUCTS,
+        payload: products,
+      });
+      const categories = await getcategories();
+      dispatch({
+        type: actionTypes.INITIALIZE_CATEGORIES,
+        payload: categories,
+      });
+      setLoadingProducts(false);
 
-        const categories = await response.json();
+      setAddressList(
+        localStorage.getItem("AddressList")
+          ? JSON.parse(localStorage.getItem("AddressList"))
+          : []
+      );
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return dispatch({
-          type: actionTypes.INITIALIZE_CATEGORIES,
-          payload: JSON.parse(categories),
-        });
-      };
-
-      getProducts();
-      getCategories();
-    } catch (error) {
-      return new Error(error);
-    }
-  }, [session]);
+      setCurrentAddress(addressList[0]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getProductById = (productId) => {
     return state.allProducts.find((product) => product.id === productId);
   };
+
   const updateInCartOrInWish = (productId, type, value) => {
     if (productId) {
       dispatch({
@@ -86,6 +78,7 @@ export default function ProductsContextProvider({ children }) {
       type: filterTypes.CLEAR_FILTER,
     });
   };
+
   const trendingProducts = state.allProducts.filter(
     (product) => product.isfeatured
   );
@@ -95,6 +88,7 @@ export default function ProductsContextProvider({ children }) {
       type: addressTypes.ADD_ADDRESS,
       payload: [newAddress, ...state.addressList],
     });
+    console.log("StateAddress", state.addressList);
   };
   const updateAddress = (addressId, updatedAddress) => {
     dispatch({
@@ -116,8 +110,6 @@ export default function ProductsContextProvider({ children }) {
       setCurrentAddress({});
     }
   };
-  const isInCart = (productId) =>
-    state.allProducts.find((item) => item.id === productId && item.inCart);
 
   const isInWish = (productId) =>
     state.allProducts.find((item) => item.id === productId && item.inWish);
@@ -130,8 +122,7 @@ export default function ProductsContextProvider({ children }) {
         filters: state.filters,
         maxRange: state.maxRange,
         categoryList: state.categoryList,
-        addressList: state.addressList,
-        isInCart,
+        addressList,
         isInWish,
         isOrderPlaced,
         currentAddress,
@@ -145,6 +136,7 @@ export default function ProductsContextProvider({ children }) {
         deleteAddress,
         setCurrentAddress,
         setisOrderPlaced,
+        loadingProducts,
       }}
     >
       {children}

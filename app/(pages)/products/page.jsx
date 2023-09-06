@@ -1,18 +1,19 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+
 import { BiFilter } from "react-icons/bi";
 import { MdKeyboardArrowUp } from "react-icons/md";
-import { Filters, SingleProduct, SortBy } from "../../components";
-import React, { useEffect, useState } from "react";
 
 import { useFilter } from "../../utils/filtersHook";
+import { Filters, SingleProduct, SortBy } from "../../components";
 
 const ProductListing = () => {
+  const productsList = useFilter();
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [showScrollArrow, setShowScrollArrow] = useState(false);
-
-  const productsList = useFilter();
 
   const scrollToTop = () => {
     window.scrollTo({

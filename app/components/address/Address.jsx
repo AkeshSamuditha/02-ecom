@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from "react";
 
-// import { useProductsContext } from "../../contexts";
+import { useProductsContext } from "@app/contexts";
 import AddressCard from "./AddressCard";
 import AddressForm from "./AddressForm";
 
 const Address = ({ isEdit }) => {
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [editAddress, setEditAddress] = useState(null);
-  // const { addressList } = useProductsContext();
+  const { addressList } = useProductsContext();
   return (
     <>
       {!isEdit && <h1 className="text-2xl font-bold">Address</h1>}
@@ -31,9 +31,7 @@ const Address = ({ isEdit }) => {
         </div>
       )}
       <div className="flex flex-col gap-2">
-        {" "}
-        List of Something
-        {/* {addressList.map((address) => (
+        {addressList.map((address) => (
           <Fragment key={address.id}>
             {showAddressForm && editAddress?.id === address.id ? (
               <AddressForm
@@ -51,7 +49,7 @@ const Address = ({ isEdit }) => {
               />
             )}
           </Fragment>
-        ))} */}
+        ))}
       </div>
     </>
   );

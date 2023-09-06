@@ -1,278 +1,114 @@
 "use client";
 
 import { useEffect, useReducer, useState } from "react";
-import { initialState, cartReducer } from "../reducers/cartReducer";
-// import {
-//   deleteProductFromCartService,
-//   getCartItemsService,
-//   postAddProductToCartService,
-//   postUpdateProductQtyCartService,
-// } from "../../api/apiServices";
-import { actionTypes } from "../utils/actiontypes";
-import { useProductsContext } from "./";
+import { useProductsContext } from "./index";
+import { getProduct } from "@app/actions/serverActions";
 // import { notify } from "../../utils/utils";
 
-import { useSession } from "next-auth/react";
 import CartProvider from "../components/providers/cartProvider";
 
+// type cartItem = {
+//   id: string;
+//   quantity: number;
+//   price: number;
+// }
+
 const CartContextProvider = ({ children }) => {
-  const { data: session } = useSession();
-  const { updateInCartOrInWish, clearCarted } = useProductsContext();
+  const [cart, setCart] = useState([]);
   const [loadingCart, setLoadingCart] = useState(false);
   const [disableCart, setDisableCart] = useState(false);
-
-  const [state, dispatch] = useReducer(cartReducer, initialState);
-  // console.log("state", state);
+  const [totalPriceOfCart, setTotalPriceOfCart] = useState(0);
 
   useEffect(() => {
-    if (session) {
-      // setLoadingCart(true);
-      (async () => {
-        try {
-          const response = await fetch(`/api/cart/${session.user.id}`, {
-            method: "GET",
-          });
-          const cart = await response.json();
-          // const cartRes = await getCartItemsService(token);
+    initializeCart();
+  }, []);
 
-          if (!response.ok) {
-            throw new Error("Failed to fetch data");
-          }
-          dispatch({
-            type: actionTypes.INITIALIZE_CART,
-            payload: JSON.parse(cart),
-          });
-        } catch (err) {
-          return;
-          // notify(
-          //   "error",
-          //   err?.response?.data?.errors
-          //     ? err?.response?.data?.errors[0]
-          //     : err?.response?.data?.message
-          // );
-          // } finally {
-          //   // setLoadingCart(false);
-          // }
-        }
-      })();
-    }
-  }, [session]);
+  useEffect(() => {
+    const newTotalPrice = cart.reduce(
+      (acc, { quantity, price }) => acc + quantity * price,
+      0
+    );
+    setTotalPriceOfCart(newTotalPrice);
+  }, [cart]);
 
-  const addProductToCart = async (product) => {
-    setDisableCart(true);
-
-    product = {
-      id: product.id,
-      quantity: 1,
-      price: product.price,
-    };
-    try {
-      const response = await fetch(`/api/cart/${session.user.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      });
-      const cart = await response.json();
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-
-      dispatch({
-        type: actionTypes.ADD_PRODUCT_TO_CART,
-        payload: [{ ...product, qty: 1 }, ...state.cart],
-      });
-      updateInCartOrInWish(product.id, "inCart", true);
-      // notify("success", "Product Added to Cart");
-    } catch (err) {
-      // notify(
-      //   "error",
-      //   err?.response?.data?.errors
-      //     ? err?.response?.data?.errors[0]
-      //     : "Some Error Occurred!!"
-      // );
-    } finally {
-      setDisableCart(false);
-    }
+  const initializeCart = () => {
+    setCart(
+      localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : []
+    );
   };
 
+  const addProductToCart = (product) => {
+    const updateCart = [...cart];
+    const cartItem = updateCart.find((cartItem) => cartItem.id === product.id);
+
+    if (cartItem) {
+      cartItem.quantity += 1;
+    } else {
+      const newCartItem = {
+        id: product.id,
+        quantity: 1,
+        price: product.price,
+      };
+      updateCart.push(newCartItem);
+    }
+    localStorage.setItem("cart", JSON.stringify(updateCart));
+
+    setCart(updateCart);
+  };
+
+  //type: "increment" | "decrement"
   const updateProductQtyInCart = async (productId, type) => {
-    setDisableCart(true);
+    const updateCart = [...cart];
+    const cartItem = updateCart.find((cartItem) => cartItem.id === productId);
 
-    const product = {
-      id: productId,
-      type: type,
-    };
-    try {
-      const response = await fetch(`/api/cart/${session.user.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
+    if (type === "increment") {
+      const product = await getProduct(productId);
+      if (cartItem.quantity === product.quantity)
+        return alert("You can't add more than available quantity");
+      cartItem.quantity += 1;
+    } else {
+      if (cartItem.quantity === 1) {
+        deleteProductFromCart(productId);
+      } else {
+        cartItem.quantity -= 1;
       }
-      const cart = await response.json();
-      dispatch({
-        type: actionTypes.UPDATE_PRODUCT_QTY_IN_CART,
-        payload: JSON.parse(cart),
-      });
-
-      //   const response = await fetch(`/api/cart/${session.user.id}`, {
-      //     method: "PUT",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(product),
-      //   });
-      //   // const response = await postUpdateProductQtyCartService(
-      //   //   productId,
-      //   //   type,
-      //   //   session
-      //   // );
-      //   console.log({ response });
-      //   if (response.status === 200 || response.status === 201) {
-      //     if (type === "increment") {
-      //       dispatch({
-      //         type: actionTypes.UPDATE_PRODUCT_QTY_IN_CART,
-      //         payload: state.cart.map((product) =>
-      //           product.id === productId
-      //             ? { ...product, qty: product.quantity + 1 }
-      //             : product
-      //         ),
-      //       });
-      //     } else {
-      //       dispatch({
-      //         type: actionTypes.UPDATE_PRODUCT_QTY_IN_CART,
-      //         payload: state.cart.map((product) =>
-      //           product.id === productId
-      //             ? { ...product, qty: product.quantity - 1 }
-      //             : product
-      //         ),
-      //       });
-      //     }
-      //   }
-    } catch (err) {
-      // notify(
-      //   "error",
-      //   err?.response?.data?.errors
-      //     ? err?.response?.data?.errors[0]
-      //     : "Some Error Occurred!!"
-      // );
-    } finally {
-      setDisableCart(false);
     }
+    localStorage.setItem("cart", JSON.stringify(updateCart));
+    setCart(updateCart);
+    return cartItem.quantity;
   };
 
-  const deleteProductFromCart = async (productId) => {
-    setDisableCart(true);
-    try {
-      const response = await fetch(`/api/cart/${session.user.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productId),
-      });
-      const cart = await response.json();
-      console.log("cart", cart);
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      dispatch({
-        type: actionTypes.DELETE_PRODUCTS_FROM_CART,
-        payload: JSON.parse(cart),
-      });
-
-      updateInCartOrInWish(productId, "inCart", false);
-      //   notify("info", "Product Removed from Cart");
-      // }
-    } catch (err) {
-      console.log(err);
-      // notify(
-      //   "error",
-      //   err?.response?.data?.errors
-      //     ? err?.response?.data?.errors[0]
-      //     : "Some Error Occurred!!"
-      // );
-    } finally {
-      setDisableCart(false);
-    }
+  const deleteProductFromCart = (productId) => {
+    const updateCart = cart.filter((cartItem) => cartItem.id !== productId);
+    setCart(updateCart);
+    localStorage.setItem("cart", JSON.stringify(updateCart));
   };
 
   const clearCart = () => {
-    state.cart.map(async ({ id }) => {
-      try {
-        const response = await fetch(`/api/cart/${session.user.id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(id),
-        });
-        const cart = await response.json();
-        console.log("cart", cart);
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        dispatch({
-          type: actionTypes.DELETE_PRODUCTS_FROM_CART,
-          payload: JSON.parse(cart),
-        });
-
-        updateInCartOrInWish(productId, "inCart", false);
-        //   notify("info", "Product Removed from Cart");
-      } catch (err) {
-        console.log(err);
-        // notify(
-        //   "error",
-        //   err?.response?.data?.errors
-        //     ? err?.response?.data?.errors[0]
-        //     : "Some Error Occurred!!"
-        // );
-      } finally {
-        setDisableCart(false);
-      }
-    });
-    updateInCartOrInWish();
+    setCart([]);
+    localStorage.removeItem("cart");
   };
 
-  // const { totalPriceOfCartProducts, actualPriceOfCart } = {
-  //   totalPriceOfCartProducts: 900,
-  //   actualPriceOfCart: 10000,
-  // };
-  // const { totalPriceOfCartProducts, actualPriceOfCart } = state.cart.reduce(
-  //   (acc, { qty, price, newPrice }) => ({
-  //     totalPriceOfCartProducts: acc.totalPriceOfCartProducts + qty * newPrice,
-  //     actualPriceOfCart: acc.actualPriceOfCart + qty * price,
-  //   }),
-  //   { totalPriceOfCartProducts: 0, actualPriceOfCart: 0 }
-  // );
-
-  const { actualPriceOfCart } = state.cart.reduce(
-    (acc, { quantity, price }) => ({
-      actualPriceOfCart: acc.actualPriceOfCart + quantity * price,
-    }),
-    { actualPriceOfCart: 0 }
-  );
+  const isInCart = (productId) => {
+    return cart.some((cartItem) => cartItem.id === productId);
+  };
 
   return (
     <CartProvider.Provider
       value={{
-        cart: state.cart,
+        cart,
         disableCart,
         loadingCart,
         addProductToCart,
         updateProductQtyInCart,
         deleteProductFromCart,
+        totalPriceOfCart,
         // totalPriceOfCartProducts,
-        actualPriceOfCart,
+        totalPriceOfCart,
         clearCart,
+        isInCart,
       }}
     >
       {children}

@@ -1,39 +1,26 @@
 import React from "react";
+import { useState } from "react";
 import Image from "next/image";
-import imageKitLoader from "../../utils/imageKitLoader";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { BsBookmarkHeart, BsFillBookmarkHeartFill } from "react-icons/bs";
-import {
-  useCartContext,
-  useProductsContext,
-  //   useWishlistContext,
-} from "../../contexts";
 import { useRouter } from "next/navigation";
 
-const CartItemCard = ({ product, productinInventory, isSearch, setSearch }) => {
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+
+import { useCartContext, useProductsContext } from "@app/contexts/index";
+
+const CartItemCard = ({ product, isSearch, setSearch }) => {
   const navigate = useRouter();
+
   const { getProductById } = useProductsContext();
-  const productInInventory = getProductById(product.id);
-  // const isInWish  = true
-  // const { isInWish } = useProductsContext();
   const { updateProductQtyInCart, deleteProductFromCart, disableCart } =
     useCartContext();
-  // const { addProductToWishlist, deleteProductFromWishlist, disableWish } =
-  //   useWishlistContext();
+  const productInInventory = getProductById(product.id);
+
+  const [quantity, setQuantity] = useState(product.quantity);
 
   const updateHandler = (type) => {
-    if (
-      type === "increment" &&
-      productInInventory.quantity > product.quantity
-    ) {
-      updateProductQtyInCart(product.id, type);
-    } else if (product.quantity > 1) {
-      updateProductQtyInCart(product.id, type);
-    } else {
-      deleteProductFromCart(product.id);
-    }
+    setQuantity(updateProductQtyInCart(product.id, type));
   };
-  // const inWish = isInWish(product.id);
+
   return (
     <div
       className={`m-auto flex flex-col gap-2  p-4 rounded-sm shadow-sm bg-white/[0.6] mb-2 max-w-xl ${
@@ -54,7 +41,6 @@ const CartItemCard = ({ product, productinInventory, isSearch, setSearch }) => {
             } rounded-md flex items-center`}
           >
             <Image
-              loader={imageKitLoader}
               src={productInInventory.image}
               alt="Sample image"
               width={200}
@@ -77,7 +63,7 @@ const CartItemCard = ({ product, productinInventory, isSearch, setSearch }) => {
                     <AiOutlineMinus />
                   </button>
                   <span className="h-full w-10 bg-black/[0.075]  rounded-sm flex items-center justify-center">
-                    {product.quantity}
+                    {quantity}
                   </span>
                   <button
                     className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs disabled:cursor-not-allowed"
@@ -95,23 +81,6 @@ const CartItemCard = ({ product, productinInventory, isSearch, setSearch }) => {
                   >
                     Remove from Cart
                   </button>
-                  {/* <button
-                    className="disabled:cursor-not-allowed"
-                    disabled={disableWish}
-                    // onClick={() => {
-                    //   if (inWish) {
-                    //     deleteProductFromWishlist(product.id);
-                    //   } else {
-                    //     addProductToWishlist(product);
-                    //   }
-                    // }}
-                  >
-                    {inWish ? (
-                      <BsFillBookmarkHeartFill className="text-xl text-rose-600 hover:shadow-md transition" />
-                    ) : (
-                      <BsBookmarkHeart className="text-xl hover:text-rose-600 hover:shadow-md transition" />
-                    )}
-                  </button> */}
                 </div>
               </div>
             )}
@@ -119,9 +88,6 @@ const CartItemCard = ({ product, productinInventory, isSearch, setSearch }) => {
         </div>
         <div className="flex flex-col items-end">
           <span>Rs.{product.price}</span>
-          {/* <span className="text-xs line-through text-gray-600">
-            Rs. {product.price}
-          </span> */}
         </div>
       </div>
     </div>

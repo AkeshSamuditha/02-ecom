@@ -1,21 +1,21 @@
 const PriceDetailsCard = ({
   totalItems,
-  actualPriceOfCart,
-  totalPriceOfCartProducts,
+  totalPriceOfCart,
+  // totalPriceOfCartProducts,
 }) => {
-  totalItems = 5;
-  actualPriceOfCart = 1000;
-  totalPriceOfCartProducts = 900;
+  // totalItems = 5;
+  // totalPriceOfCart = 1000;
+  // totalPriceOfCartProducts = 900;
   const summaryData = [
-    { label: "Total Products", value: totalItems },
+    { label: "Total Items", value: totalItems },
     {
       label: "Subtotal",
-      value: `Rs.${actualPriceOfCart}`,
+      value: `Rs. ${totalPriceOfCart}`,
     },
-    {
-      label: "Discount",
-      value: `-Rs${actualPriceOfCart - totalPriceOfCartProducts}`,
-    },
+    // {
+    //   label: "Discount",
+    //   value: `-Rs${totalPriceOfCart - totalPriceOfCartProducts}`,
+    // },
     {
       label: "Delivery Charges",
       value: "Free",

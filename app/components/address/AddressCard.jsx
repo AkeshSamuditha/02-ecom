@@ -1,4 +1,4 @@
-// import { useProductsContext } from "../../contexts";
+import { useProductsContext } from "@app/contexts";
 
 const AddressCard = ({
   address,
@@ -9,8 +9,8 @@ const AddressCard = ({
   setShowAddressForm,
 }) => {
   const { id, fullname, mobile, flat, area, city, pincode } = address;
-  // const { currentAddress, setCurrentAddress, updateAddress, deleteAddress } =
-  //   useProductsContext();
+  const { currentAddress, setCurrentAddress, updateAddress, deleteAddress } =
+    useProductsContext();
   return (
     <label
       className={`flex ${

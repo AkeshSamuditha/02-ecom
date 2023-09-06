@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-// import { useProductsContext } from "../../contexts";
+import { useProductsContext } from "@app/contexts";
 import { v4 as uuid } from "uuid";
 
 const AddressForm = ({ setShowAddressForm, editAddress, setEditAddress }) => {
-  // const { addAddress, setCurrentAddress, updateAddress } = useProductsContext();
+  const { addAddress, setCurrentAddress, updateAddress } = useProductsContext();
   const [newAddress, setNewAddress] = useState(
     editAddress
       ? editAddress
@@ -21,11 +21,12 @@ const AddressForm = ({ setShowAddressForm, editAddress, setEditAddress }) => {
     e.preventDefault();
 
     if (editAddress) {
-      // updateAddress(newAddress.id, newAddress);
+      updateAddress(newAddress.id, newAddress);
     } else {
-      // addAddress(newAddress);
-      // setCurrentAddress(newAddress);
+      addAddress(newAddress);
+      setCurrentAddress(newAddress);
     }
+
     setShowAddressForm(false);
   };
   return (

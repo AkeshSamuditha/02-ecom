@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import imageKitLoader from "../../utils/imageKitLoader";
-import { useProductsContext } from "../../contexts/index";
 import { useRouter } from "next/navigation";
+
+import { useProductsContext } from "../../contexts/index";
 
 const CategoryCard = ({ category }) => {
   const navigate = useRouter();
+
   const { applyFilters } = useProductsContext();
-  const [showCategory, setShowCategory] = useState(true);
+
   const clickHandler = () => {
     applyFilters("gender", category.name);
     navigate.push("/products", { state: { from: "category" } });
   };
+
   return (
     <section
       className=" flex flex-col items-center rounded-xl  bg-black/[.06] cursor-pointer gap-3 relative overflow-hidden  categoryContainer"
       onClick={clickHandler}
     >
       <Image
-        loader={imageKitLoader}
         src={category.image}
         alt={category.name}
         width={400}

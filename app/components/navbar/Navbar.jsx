@@ -1,27 +1,24 @@
 "use client";
-
-import Link from "next/link";
 import React from "react";
-import Logo from "./Logo";
-import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import LogoutButton from "./logoutButton";
-import LoginButton from "./loginButton";
-import Search from "../search";
-import MenuDropdown from "./MenuDropdown";
+
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+
 import { BsBookmarkHeart } from "react-icons/bs";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { MdOutlineExplore } from "react-icons/md";
-
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useRouter } from "next/navigation";
-// const { token } = useAuthContext();
-// const { cart } = useCartContext();
-// const { wishlist } = useWishlistContext();
-// const navigate = useRouter();
+
+import { LoginButton, LogoutButton } from "./UserButtons";
+import Search from "../search";
+import MenuDropdown from "./MenuDropdown";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const navigate = useRouter();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [colorChange, setColorChange] = useState(false);
 

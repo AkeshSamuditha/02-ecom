@@ -1,15 +1,27 @@
 "use client";
 
 import React from "react";
-import { useCartContext } from "../../contexts";
-import CartItemCard from "../../components/cart/CartItemCard";
-import CartTotalCard from "../../components/cart/CartTotalCard";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+
+import { useCartContext } from "../../contexts";
+import { useProductsContext } from "../../contexts";
+
+import CartItemCard from "../../components/cart/CartItemCard";
+import PriceCard from "../../components/cart/PriceCard";
 
 const Cart = () => {
-  const { cart } = useCartContext();
+  const { cart, totalPriceOfCart } = useCartContext();
+  const { loadingProducts } = useProductsContext();
+  const [isOrderPlaced, setisOrderPlaced] = useState(false);
+
   const navigate = useRouter();
+  if (loadingProducts) {
+    // waiting till products are loading
+    return;
+  }
 
   return (
     <div className="py-2 ">
@@ -23,7 +35,34 @@ const Cart = () => {
               <CartItemCard key={product.id} product={product} />
             ))}
           </main>
-          <CartTotalCard cart={cart} />
+          <section className="md:col-span-1 py-7 px-7 rounded-md shadow-sm bg-white/[0.7] flex flex-col gap-6 w-full h-min">
+            <h1 className="text-xl">Price Details</h1>
+            {cart.map((product) => (
+              <PriceCard key={product.id} product={product} />
+            ))}
+
+            <hr />
+            <div className="flex justify-between items-center">
+              <p className=" text-gray-600">Total</p>
+              <p className="text-2xl">Rs. {totalPriceOfCart}</p>
+            </div>
+
+            <div className="w-full py-2   flex gap-4 items-center">
+              <button
+                className="btn-rounded-primary rounded-full flex items-center gap-2 md:text-sm lg:text-base"
+                onClick={() => {
+                  setisOrderPlaced(true);
+                  setTimeout(() => {
+                    navigate.push("/checkout", {
+                      state: "cart",
+                    });
+                  }, 100);
+                }}
+              >
+                Proceed to Checkout
+              </button>
+            </div>
+          </section>
         </div>
       ) : (
         <div className="h-[60vh] w-full flex flex-col items-center justify-center  gap-3 ">
@@ -42,12 +81,9 @@ const Cart = () => {
             </p>
           </div>
 
-          <button
-            className="btn-rounded-secondary text-sm mt-5"
-            onClick={() => navigate.push("/products")}
-          >
-            Explore
-          </button>
+          <Link href="/products">
+            <div className="btn-rounded-secondary text-sm mt-5">Explore</div>
+          </Link>
         </div>
       )}
     </div>
