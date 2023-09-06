@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { imageKitLoader } from "../../../helper/imageKitLoader";
 
 import { AiOutlineClose } from "react-icons/ai";
-import spinningLoader from "../../../public/assets/spinningLoader.svg";
 import OrderSummary from "./OrderSummary";
-// import { useAuthContext, useCartContext } from "../../contexts";
-import appLogo from "../../../public/assets//thugGlasses.png";
-// import { useRouter} from "next/navigation";
+import { useCartContext } from "@app/contexts";
+
+import { useRouter } from "next/navigation";
 
 const Modal = ({ showModal, setShowModal }) => {
-  // const { userInfo } = useAuthContext();
-  // const { clearCart, totalPriceOfCartProducts } = useCartContext();
+  const { clearCart, totalPriceOfCartProducts } = useCartContext();
   const [disableBtn, setDisableBtn] = useState(false);
-  // const navigate = useRouter();
+  const navigate = useRouter();
 
   // const clickHandler = () => {
   //   setDisableBtn(true);
@@ -23,22 +20,24 @@ const Modal = ({ showModal, setShowModal }) => {
   //     displayRazorpay();
   //   }, 1000);
   // };
-  const loadScript = async (url) => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = url;
 
-      script.onload = () => {
-        resolve(true);
-      };
+  // const loadScript = async (url) => {
 
-      script.onerror = () => {
-        resolve(false);
-      };
+  //   return new Promise((resolve) => {
+  //     const script = document.createElement("script");
+  //     script.src = url;
 
-      document.body.appendChild(script);
-    });
-  };
+  //     script.onload = () => {
+  //       resolve(true);
+  //     };
+
+  //     script.onerror = () => {
+  //       resolve(false);
+  //     };
+
+  //     document.body.appendChild(script);
+  //   });
+  // };
 
   // const displayRazorpay = async () => {
   //   const res = await loadScript(
@@ -105,7 +104,6 @@ const Modal = ({ showModal, setShowModal }) => {
                   >
                     {disableBtn ? (
                       <Image
-                        loader={imageKitLoader}
                         src="bannerImg.png"
                         alt="Sample image"
                         width={20}
