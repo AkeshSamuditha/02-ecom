@@ -4,53 +4,74 @@ import { useProductsContext } from "@app/contexts";
 import AddressCard from "./AddressCard";
 import AddressForm from "./AddressForm";
 
-const Address = ({ isEdit }) => {
+const Address = () => {
+  const [isEdit, setIsEdit] = useState(false);
   const [showAddressForm, setShowAddressForm] = useState(false);
-  const [editAddress, setEditAddress] = useState(null);
-  const { addressList } = useProductsContext();
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const { addressList, currentAddress } = useProductsContext();
+
   return (
     <>
-      {!isEdit && <h1 className="text-2xl font-bold">Address</h1>}
-      {showAddressForm && !editAddress ? (
+      <h1 className="text-2xl font-bold">Address</h1>
+      {showAddressForm ? (
         <AddressForm
           setShowAddressForm={setShowAddressForm}
-          editAddress={editAddress}
-          setEditAddress={setEditAddress}
+          selectedAddress={selectedAddress}
+          setSelectedAddress={setSelectedAddress}
+          setIsEdit={setIsEdit}
+          isEdit={isEdit}
         />
       ) : (
-        <div className="flex flex-col items-start ">
-          <button
-            className="btn-rounded-primary text-sm "
-            onClick={() => {
-              setShowAddressForm(true);
-              setEditAddress(false);
-            }}
-          >
-            + Add New Address
-          </button>
-        </div>
-      )}
-      <div className="flex flex-col gap-2">
-        {addressList.map((address) => (
-          <Fragment key={address.id}>
-            {showAddressForm && editAddress?.id === address.id ? (
-              <AddressForm
-                setShowAddressForm={setShowAddressForm}
-                editAddress={editAddress}
-                setEditAddress={setEditAddress}
-              />
-            ) : (
-              <AddressCard
-                address={address}
-                isEdit={isEdit}
-                editAddress={editAddress}
-                setEditAddress={setEditAddress}
-                setShowAddressForm={setShowAddressForm}
-              />
+        <>
+          <div className="flex justify-between">
+            <div className="flex flex-col items-start">
+              <button
+                className="btn-rounded-primary text-sm"
+                onClick={() => {
+                  setShowAddressForm(true);
+                }}
+              >
+                + Add New Address
+              </button>
+            </div>
+            {addressList.length > 0 && !isEdit && (
+              <div className="flex flex-col items-start">
+                <button
+                  className="btn-rounded-secondary text-sm"
+                  onClick={() => {
+                    setIsEdit(true);
+                    setShowAddressForm(true);
+                    setSelectedAddress(currentAddress);
+                  }}
+                >
+                  <span>&#9998;</span>
+                  Edit
+                </button>
+              </div>
             )}
-          </Fragment>
-        ))}
-      </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
+              {addressList.length === 0 ? (
+                <p className="text-center text-zinc-500">
+                  You have not selected any address to ship
+                </p>
+              ) : (
+                addressList.map((address) => (
+                  <AddressCard
+                    key={address.id}
+                    address={address}
+                    editAddress={selectedAddress}
+                    setEditAddress={setSelectedAddress}
+                    isEdit={isEdit}
+                  />
+                ))
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

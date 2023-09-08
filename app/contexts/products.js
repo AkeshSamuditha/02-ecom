@@ -1,19 +1,24 @@
 "use client";
 
-import { useEffect, useReducer, useState } from "react";
+import { use, useEffect, useReducer, useState } from "react";
 import { initialState, productsReducer } from "../reducers/productsReducer";
 import { actionTypes, addressTypes, filterTypes } from "../utils/actiontypes";
 import ProductProvider from "/app/components/providers/productsProvider.jsx";
 import { useSession } from "next-auth/react";
 import { getProducts, getcategories } from "@app/actions/serverActions";
+import Address from "@app/components/address/Address";
 
 export default function ProductsContextProvider({ children }) {
   const [state, dispatch] = useReducer(productsReducer, initialState);
 
   const [addressList, setAddressList] = useState([]);
-  const [currentAddress, setCurrentAddress] = useState(addressList[0]);
+  const [currentAddress, setCurrentAddress] = useState(null);
   const [isOrderPlaced, setisOrderPlaced] = useState(false);
   const [loadingProducts, setLoadingProducts] = useState(false);
+
+  useEffect(() => {
+    setCurrentAddress(addressList[0]);
+  }, [loadingProducts]);
 
   useEffect(() => {
     setLoadingProducts(true);
@@ -29,15 +34,13 @@ export default function ProductsContextProvider({ children }) {
         type: actionTypes.INITIALIZE_CATEGORIES,
         payload: categories,
       });
-      setLoadingProducts(false);
 
       setAddressList(
         localStorage.getItem("AddressList")
           ? JSON.parse(localStorage.getItem("AddressList"))
           : []
       );
-
-      setCurrentAddress(addressList[0]);
+      setLoadingProducts(false);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -84,31 +87,34 @@ export default function ProductsContextProvider({ children }) {
   );
 
   const addAddress = (newAddress) => {
-    dispatch({
-      type: addressTypes.ADD_ADDRESS,
-      payload: [newAddress, ...state.addressList],
-    });
-    console.log("StateAddress", state.addressList);
+    addressList.unshift(newAddress);
+    const updatedList = addressList;
+    setAddressList(updatedList);
+
+    localStorage.setItem("AddressList", JSON.stringify(addressList));
   };
+
   const updateAddress = (addressId, updatedAddress) => {
-    dispatch({
-      type: addressTypes.ADD_ADDRESS,
-      payload: state.addressList.map((item) =>
-        item.id === addressId ? updatedAddress : item
-      ),
-    });
+    const updatedList = addressList.map((item) =>
+      item.id === addressId ? updatedAddress : item
+    );
+
+    setAddressList(updatedList); // Assuming you have a setter function for addressList
+
     if (currentAddress.id === addressId) {
       setCurrentAddress(updatedAddress);
     }
+    localStorage.setItem("AddressList", JSON.stringify(addressList));
   };
+
   const deleteAddress = (addressId) => {
-    dispatch({
-      type: addressTypes.ADD_ADDRESS,
-      payload: state.addressList.filter(({ id }) => id !== addressId),
-    });
+    const updatedList = addressList.filter(({ id }) => id !== addressId);
+    setAddressList(updatedList);
+
     if (currentAddress.id === addressId) {
-      setCurrentAddress({});
+      setCurrentAddress(addressList[0]);
     }
+    localStorage.setItem("AddressList", JSON.stringify(addressList));
   };
 
   const isInWish = (productId) =>

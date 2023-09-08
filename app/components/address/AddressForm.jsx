@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { useProductsContext } from "@app/contexts";
 import { v4 as uuid } from "uuid";
+import { FcCancel } from "react-icons/fc";
+import { FaSave, FaTrash } from "react-icons/fa";
 
-const AddressForm = ({ setShowAddressForm, editAddress, setEditAddress }) => {
-  const { addAddress, setCurrentAddress, updateAddress } = useProductsContext();
+const AddressForm = ({
+  setShowAddressForm,
+  selectedAddress,
+  setSelectedAddress,
+  setIsEdit,
+  isEdit,
+}) => {
+  console.log(selectedAddress);
+  const { addAddress, setCurrentAddress, updateAddress, deleteAddress } =
+    useProductsContext();
   const [newAddress, setNewAddress] = useState(
-    editAddress
-      ? editAddress
+    selectedAddress
+      ? selectedAddress
       : {
           id: uuid(),
           fullname: "",
@@ -20,7 +30,7 @@ const AddressForm = ({ setShowAddressForm, editAddress, setEditAddress }) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (editAddress) {
+    if (selectedAddress) {
       updateAddress(newAddress.id, newAddress);
     } else {
       addAddress(newAddress);
@@ -28,6 +38,8 @@ const AddressForm = ({ setShowAddressForm, editAddress, setEditAddress }) => {
     }
 
     setShowAddressForm(false);
+    setSelectedAddress(false);
+    setIsEdit(false);
   };
   return (
     <form
@@ -112,29 +124,7 @@ const AddressForm = ({ setShowAddressForm, editAddress, setEditAddress }) => {
         </label>
       </div>
 
-      <div className="flex gap-3 mt-3 flex-wrap">
-        {!editAddress && (
-          <button
-            type="button"
-            className="btn-rounded-secondary rounded-full flex items-center gap-2 text-sm p-1"
-            onClick={() => {
-              setNewAddress({
-                id: uuid(),
-                fullname: "Naruto Uzumaki",
-                mobile: "2134567890",
-                flat: "9, 100, uzumaki aparts",
-                area: "Hokage rock",
-                city: "Konohagakure",
-                pincode: "090909",
-              });
-              if (editAddress) {
-                setEditAddress(null);
-              }
-            }}
-          >
-            Fill dummy values
-          </button>
-        )}
+      <div className="flex flex-Column items-center gap-2 py-2 justify-center">
         <button
           type="button"
           className="btn-rounded-secondary rounded-full flex items-center gap-2 text-sm"
@@ -148,19 +138,38 @@ const AddressForm = ({ setShowAddressForm, editAddress, setEditAddress }) => {
               city: "",
               pincode: "",
             });
-            if (editAddress) {
-              setEditAddress(null);
-            }
+            setSelectedAddress(false);
+            setIsEdit(false);
           }}
         >
-          Cancel
+          <span className="hidden sm:inline">Cancel</span>
+          <span className="sm:hidden">
+            <FcCancel size="1.25em" />
+          </span>
         </button>
         <button
           type="submit"
           className="btn-rounded-primary rounded-full flex items-center gap-2 text-sm"
         >
-          Save
+          <span className="hidden sm:inline">Save</span>
+          <span className="sm:hidden">
+            <FaSave size="1.25em" />
+          </span>
         </button>
+        {isEdit && (
+          <button
+            className="btn-rounded-primary text-sm text-red-600 "
+            onClick={() => {
+              setSelectedAddress(false);
+              deleteAddress(selectedAddress.id);
+            }}
+          >
+            <span className="hidden sm:inline">Remove</span>
+            <span className="sm:hidden">
+              <FaTrash size="1.25em" />
+            </span>
+          </button>
+        )}
       </div>
     </form>
   );

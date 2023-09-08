@@ -14,7 +14,7 @@ const AddressCard = ({
   return (
     <label
       className={`flex ${
-        id === currentAddress.id && isEdit ? "bg-gray-100" : "bg-gray-50"
+        id === currentAddress?.id && isEdit ? "bg-gray-100" : "bg-gray-50"
       }  items-center gap-2 shadow-sm p-4 rounded-sm cursor-pointer`}
     >
       {showInput && (
@@ -23,7 +23,7 @@ const AddressCard = ({
           name="address"
           id=""
           className="accent-current me-2"
-          checked={id === currentAddress.id}
+          checked={id === currentAddress?.id}
           onChange={() => setCurrentAddress(address)}
         />
       )}
@@ -39,25 +39,6 @@ const AddressCard = ({
           Mobile:
           <span className="font-semibold ps-1 break-all">{mobile}</span>
         </p>
-        {isEdit && (
-          <div className="flex gap-3 py-2">
-            <button
-              className="text-amber-500 font-bold"
-              onClick={() => {
-                setEditAddress(address);
-                setShowAddressForm(true);
-              }}
-            >
-              Edit
-            </button>
-            <button
-              className="text-red-600 font-bold"
-              onClick={() => deleteAddress(id)}
-            >
-              Remove
-            </button>
-          </div>
-        )}
       </div>
     </label>
   );
