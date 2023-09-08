@@ -1,12 +1,14 @@
 "use client";
 
-import { use, useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { initialState, productsReducer } from "../reducers/productsReducer";
 import { actionTypes, addressTypes, filterTypes } from "../utils/actiontypes";
 import ProductProvider from "/app/components/providers/productsProvider.jsx";
-import { useSession } from "next-auth/react";
-import { getProducts, getcategories } from "@app/actions/serverActions";
-import Address from "@app/components/address/Address";
+import {
+  getProducts,
+  getcategories,
+  getProduct,
+} from "@app/actions/serverActions";
 
 export default function ProductsContextProvider({ children }) {
   const [state, dispatch] = useReducer(productsReducer, initialState);
@@ -45,9 +47,10 @@ export default function ProductsContextProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getProductById = (productId) => {
-    return state.allProducts.find((product) => product.id === productId);
-  };
+  // const getProductById = async (productId) => {
+  //   const product = await getProduct(productId);
+  //   return product;
+  // };
 
   const updateInCartOrInWish = (productId, type, value) => {
     if (productId) {
@@ -134,7 +137,7 @@ export default function ProductsContextProvider({ children }) {
         currentAddress,
         trendingProducts,
         updateInCartOrInWish,
-        getProductById,
+        // getProductById,
         applyFilters,
         clearFilters,
         addAddress,

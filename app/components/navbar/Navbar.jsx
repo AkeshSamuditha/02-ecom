@@ -11,6 +11,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { MdOutlineExplore } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 
+import { useCartContext } from "@app/contexts/index";
 import { LoginButton, LogoutButton } from "./UserButtons";
 import Search from "../search";
 import MenuDropdown from "./MenuDropdown";
@@ -18,6 +19,8 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   const navigate = useRouter();
+
+  const { cart } = useCartContext();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [colorChange, setColorChange] = useState(false);
@@ -62,12 +65,12 @@ const Navbar = () => {
           <ul className=" hidden md:flex justify-between ps-1">
             <Link
               href="/products"
-              className="mx-2 px-3 py-1 shadow-sm rounded-xl text-white bg-yellow-700 text-sm hover:bg-yellow-800 transition"
+              className="mx-2 px-3 shadow-sm rounded-xl text-white bg-yellow-700 hover:bg-yellow-800 transition flex items-center"
             >
-              <span className="text-lg xs:hidden">Explore</span>
-              <MdOutlineExplore className=" hidden xs:block" />
+              <span className="text-lg">Explore</span>
+              <MdOutlineExplore className="hidden xs:block ml-2" />
             </Link>
-            <li className="mx-2 px-3 py-1 shadow-sm rounded-xl text-white bg-yellow-500 text-sm hover:bg-yellow-800 transition">
+            <li className="mx-2 px-3 shadow-sm rounded-xl text-white bg-yellow-500 text-sm hover:bg-yellow-800 transition flex items-center">
               {session.status === "authenticated" ? (
                 <LogoutButton />
               ) : (
@@ -82,15 +85,15 @@ const Navbar = () => {
               {/* )} */}
             </li>
             <li
-              className="relative bg-yellow-400 text-white p-2 rounded-full hover:bg-yellow-900 cursor-pointer mx-2 transition shadow-sm"
+              className="relative bg-yellow-500 text-white rounded-full hover:bg-yellow-800 cursor-pointer mx-2 transition shadow-sm flex items-center justify-center w-9 h-9"
               onClick={() => navigate.push("/cart")}
             >
-              <HiOutlineShoppingBag />
-              {/* {token && cart.length > 0 && (
+              <HiOutlineShoppingBag size="1.6rem" />
+              {cart.length > 0 && (
                 <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-rose-600 border-2 border-[--theme-color] rounded-full -top-2 -right-2 ">
                   {cart.length}
-                </div> */}
-              {/* )} */}
+                </div>
+              )}
             </li>
           </ul>
           <section className="md:hidden cursor-pointer relative">

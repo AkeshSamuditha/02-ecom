@@ -48,8 +48,10 @@ const CartContextProvider = ({ children }) => {
     } else {
       const newCartItem = {
         id: product.id,
+        name: product.name,
         quantity: 1,
         price: product.price,
+        image: product.image,
       };
       updateCart.push(newCartItem);
     }
@@ -60,28 +62,31 @@ const CartContextProvider = ({ children }) => {
 
   //type: "increment" | "decrement"
   const updateProductQtyInCart = async (productId, type) => {
-    const updateCart = [...cart];
-    const cartItem = updateCart.find((cartItem) => cartItem.id === productId);
+    const cartItem = cart.find((cartItem) => cartItem.id === productId);
+    const product = await getProduct(productId);
+
+    if (type === "increment" && cartItem.quantity >= product.quantity) {
+      return alert("You can't add more than available quantity");
+    }
+
+    if (type === "decrement" && cartItem.quantity === 1) {
+      deleteProductFromCart(productId);
+      return;
+    }
 
     if (type === "increment") {
-      const product = await getProduct(productId);
-      if (cartItem.quantity === product.quantity)
-        return alert("You can't add more than available quantity");
       cartItem.quantity += 1;
-    } else {
-      if (cartItem.quantity === 1) {
-        deleteProductFromCart(productId);
-      } else {
-        cartItem.quantity -= 1;
-      }
+    } else if (type === "decrement") {
+      cartItem.quantity -= 1;
     }
-    localStorage.setItem("cart", JSON.stringify(updateCart));
+    const updateCart = [...cart];
     setCart(updateCart);
-    return cartItem.quantity;
+    localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   const deleteProductFromCart = (productId) => {
     const updateCart = cart.filter((cartItem) => cartItem.id !== productId);
+    console.log(updateCart);
     setCart(updateCart);
     localStorage.setItem("cart", JSON.stringify(updateCart));
   };

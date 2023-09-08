@@ -10,16 +10,8 @@ import { useCartContext, useProductsContext } from "@app/contexts/index";
 const CartItemCard = ({ product, isSearch, setSearch }) => {
   const navigate = useRouter();
 
-  const { getProductById } = useProductsContext();
   const { updateProductQtyInCart, deleteProductFromCart, disableCart } =
     useCartContext();
-  const productInInventory = getProductById(product.id);
-
-  const [quantity, setQuantity] = useState(product.quantity);
-
-  const updateHandler = (type) => {
-    setQuantity(updateProductQtyInCart(product.id, type));
-  };
 
   return (
     <div
@@ -41,7 +33,7 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
             } rounded-md flex items-center`}
           >
             <Image
-              src={productInInventory.image}
+              src={product.image}
               alt="Sample image"
               width={200}
               height={200}
@@ -58,17 +50,21 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
                   <button
                     className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md  text-xs disabled:cursor-not-allowed"
                     disabled={disableCart}
-                    onClick={() => updateHandler("decrement")}
+                    onClick={() =>
+                      updateProductQtyInCart(product.id, "decrement")
+                    }
                   >
                     <AiOutlineMinus />
                   </button>
                   <span className="h-full w-10 bg-black/[0.075]  rounded-sm flex items-center justify-center">
-                    {quantity}
+                    {product.quantity}
                   </span>
                   <button
                     className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs disabled:cursor-not-allowed"
                     disabled={disableCart}
-                    onClick={() => updateHandler("increment")}
+                    onClick={() =>
+                      updateProductQtyInCart(product.id, "increment")
+                    }
                   >
                     <AiOutlinePlus />
                   </button>

@@ -14,14 +14,9 @@ import PriceCard from "../../components/cart/PriceCard";
 
 const Cart = () => {
   const { cart, totalPriceOfCart } = useCartContext();
-  const { loadingProducts } = useProductsContext();
-  const [isOrderPlaced, setisOrderPlaced] = useState(false);
+  // const [isOrderPlaced, setisOrderPlaced] = useState(false);
 
   const navigate = useRouter();
-  if (loadingProducts) {
-    // waiting till products are loading
-    return;
-  }
 
   return (
     <div className="py-2 ">
@@ -51,7 +46,7 @@ const Cart = () => {
               <button
                 className="btn-rounded-primary rounded-full flex items-center gap-2 md:text-sm lg:text-base"
                 onClick={() => {
-                  setisOrderPlaced(true);
+                  // setisOrderPlaced(true);
                   setTimeout(() => {
                     navigate.push("/checkout", {
                       state: "cart",
