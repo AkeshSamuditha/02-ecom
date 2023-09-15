@@ -25,3 +25,10 @@ export const addressTypes = {
   UPDATE_ADDRESS: "UPDATE_ADDRESS",
   DELETE_ADDRESS: "DELETE_ADDRESS",
 };
+
+export const notifyTypes = {
+  SUCCESS: "success",
+  WARN: "warn",
+  ERROR: "error",
+  INFO: "info",
+};

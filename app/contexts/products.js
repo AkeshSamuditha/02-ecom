@@ -2,13 +2,19 @@
 
 import { useEffect, useReducer, useState } from "react";
 import { initialState, productsReducer } from "../reducers/productsReducer";
-import { actionTypes, addressTypes, filterTypes } from "../utils/actiontypes";
+import {
+  actionTypes,
+  addressTypes,
+  filterTypes,
+  notifyTypes,
+} from "../utils/actiontypes";
 import ProductProvider from "/app/components/providers/productsProvider.jsx";
 import {
   getProducts,
   getcategories,
   getProduct,
 } from "@app/actions/serverActions";
+import { notify } from "@app/utils/notify";
 
 export default function ProductsContextProvider({ children }) {
   const [state, dispatch] = useReducer(productsReducer, initialState);
@@ -60,6 +66,7 @@ export default function ProductsContextProvider({ children }) {
           item.id === productId ? { ...item, [type]: value } : item
         ),
       });
+      notify(notifyTypes.SUCCESS, "Product Added to Cart");
     } else {
       dispatch({
         type: actionTypes.UPDATE_PRODUCTS,
@@ -69,6 +76,7 @@ export default function ProductsContextProvider({ children }) {
           qty: 0,
         })),
       });
+      notify(notifyTypes.SUCCESS, "Cart Emptied");
     }
   };
 
@@ -95,6 +103,7 @@ export default function ProductsContextProvider({ children }) {
     setAddressList(updatedList);
 
     localStorage.setItem("AddressList", JSON.stringify(addressList));
+    notify(notifyTypes.SUCCESS, "Address Succesfully Added");
   };
 
   const updateAddress = (addressId, updatedAddress) => {
@@ -108,6 +117,7 @@ export default function ProductsContextProvider({ children }) {
       setCurrentAddress(updatedAddress);
     }
     localStorage.setItem("AddressList", JSON.stringify(addressList));
+    notify(notifyTypes.SUCCESS, "Address Succesfully Updated");
   };
 
   const deleteAddress = (addressId) => {
@@ -118,6 +128,7 @@ export default function ProductsContextProvider({ children }) {
       setCurrentAddress(addressList[0]);
     }
     localStorage.setItem("AddressList", JSON.stringify(addressList));
+    notify(notifyTypes.SUCCESS, "Address Succesfully Deleted");
   };
 
   const isInWish = (productId) =>

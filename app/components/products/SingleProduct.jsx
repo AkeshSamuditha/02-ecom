@@ -11,6 +11,7 @@ import {
   // useWishlistContext,
 } from "../../contexts";
 import Link from "next/link";
+import CartButton from "../buttons/cartButton";
 
 // import { useLocation } from "react-router";
 // import { notify } from "../../utils/utils";
@@ -63,8 +64,8 @@ const SingleProduct = ({ product }) => {
                 </div>
 
                 <div className="flex flex-col items-end">
-                  <span className="text-lg text-gray-600">
-                    Rs. {product.price}
+                  <span className="text-lg text-gray-600 font-cabin">
+                    Rs. {product.price.toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -72,24 +73,7 @@ const SingleProduct = ({ product }) => {
             </div>
           </Link>
           <div className="w-full pt-2 border-t flex justify-center items-center">
-            <button
-              className={`border border-[--primary-text-color]  py-1.5 text-sm  rounded-full px-6 hover:bg-[--primary-text-color] hover:text-white transition hover:shadow-md disabled:cursor-not-allowed`}
-              disabled={disableCart}
-              onClick={() => {
-                if (!token) {
-                  navigate.push("/login");
-                  // notify("warn", "Please Login to continue");
-                } else {
-                  if (!inCart) {
-                    addProductToCart(product);
-                  } else {
-                    navigate.push("/cart");
-                  }
-                }
-              }}
-            >
-              {inCart ? "Added to the Cart" : "Add to Cart"}
-            </button>
+            <CartButton product={product} />
             {/* <button
             disabled={false} //{disableWish}
             className="disabled:cursor-not-allowed"

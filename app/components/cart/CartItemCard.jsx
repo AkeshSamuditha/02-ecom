@@ -1,11 +1,10 @@
-import React from "react";
-import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
-import { useCartContext, useProductsContext } from "@app/contexts/index";
+import { useCartContext } from "@app/contexts/index";
 
 const CartItemCard = ({ product, isSearch, setSearch }) => {
   const navigate = useRouter();
@@ -15,7 +14,7 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
 
   return (
     <div
-      className={`m-auto flex flex-col gap-2  p-4 rounded-sm shadow-sm bg-white/[0.6] mb-2 max-w-xl ${
+      className={`m-auto flex flex-col gap-2 p-4 rounded-lg shadow-lg bg-white/[0.6] mb-2 max-w-lg ${
         isSearch ? "cursor-pointer hover:bg-black/5" : ""
       }`}
       onClick={() => {
@@ -25,22 +24,24 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
         }
       }}
     >
-      <div className="flex  items-center flex-wrap gap-2 w-full">
-        <div className="flex flex-wrap xs:flex-nowrap justify-center xs:justify-start flex-1 items-center gap-5">
+      <div className="flex items-center flex-wrap gap-2 w-full  justify-center">
+        <div className="flex flex-wrap xs:justify-between justify-center gap-4 flex-1 items-center ">
           <div
             className={` bg-black/[0.075] ${
               isSearch ? "h-14 w-14 " : "h-28 w-28"
             } rounded-md flex items-center`}
           >
-            <Image
-              src={product.image}
-              alt="Sample image"
-              width={200}
-              height={200}
-              className="object-fit:contain"
-            />
+            <Link href={`/products/${product.id}`}>
+              <Image
+                src={product.image}
+                alt="Sample image"
+                width={200}
+                height={200}
+                className="object-fit:contain"
+              />
+            </Link>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 text-center">
             <h2 className="text-xl py-3 font-semibold">{product.name}</h2>
 
             {!isSearch && (
@@ -69,9 +70,9 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
                     <AiOutlinePlus />
                   </button>
                 </div>
-                <div className="flex gap-1 sm:gap-3  ">
+                <div className="flex gap-1 justify-center sm:gap-3   ">
                   <button
-                    className="btn-rounded-secondary  text-xs sm:text-sm mt-2 max-w-xs disabled:cursor-not-allowed"
+                    className="btn-rounded-secondary bg-gradient-to-r from-red-400 to-red-500 text-white text-xs sm:text-sm mt-2 max-w-xs border-none disabled:cursor-not-allowed font-bold "
                     disabled={disableCart}
                     onClick={() => deleteProductFromCart(product.id)}
                   >
@@ -81,9 +82,9 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
               </div>
             )}
           </div>
-        </div>
-        <div className="flex flex-col items-end">
-          <span>Rs.{product.price}</span>
+          <div className="flex items-end px-6 font-cabin">
+            <span>Rs. {product.price.toFixed(2)}</span>
+          </div>
         </div>
       </div>
     </div>

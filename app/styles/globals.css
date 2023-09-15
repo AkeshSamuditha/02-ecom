@@ -31,10 +31,7 @@
 
 body {
   background-color: var(--theme-color);
-  font-family: "Josefin Sans", sans-serif;
-}
-.font-monoton {
-  font-family: "Monoton", cursive;
+  font-family: var(--font-sans);
 }
 
 .text-loader {
@@ -50,7 +47,7 @@ body {
   align-items: center;
   font-size: 50px;
   color: rgb(207, 144, 8, 0.4);
-  font-family: "Monoton", cursive;
+  font-family: var(--font-mooli);
 }
 
 .letter {

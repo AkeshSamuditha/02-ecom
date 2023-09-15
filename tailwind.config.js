@@ -9,7 +9,11 @@ module.exports = {
     extend: {
       fontFamily: {
         // sans: ['var(--font-inter)'],
-        Sans: ["var(--font-Josefin_Sans)"],
+        sans: ["var(--font-Josefin_Sans)"],
+        mono: ["var(--font-roboto-mono)"],
+        kalam: ["var(--font-kalam)"],
+        satisfy: ["var(--font-satisfy)"],
+        cabin: ["var(--font-cabin)"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

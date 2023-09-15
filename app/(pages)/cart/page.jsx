@@ -31,18 +31,19 @@ const Cart = () => {
             ))}
           </main>
           <section className="md:col-span-1 py-7 px-7 rounded-md shadow-sm bg-white/[0.7] flex flex-col gap-6 w-full h-min">
-            <h1 className="text-xl">Price Details</h1>
+            <h1 className="text-xl font-bold">Price Details</h1>
+
             {cart.map((product) => (
               <PriceCard key={product.id} product={product} />
             ))}
 
             <hr />
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center text-2xl">
               <p className=" text-gray-600">Total</p>
-              <p className="text-2xl">Rs. {totalPriceOfCart}</p>
+              <p className="font-cabin">Rs. {totalPriceOfCart.toFixed(2)}</p>
             </div>
 
-            <div className="w-full py-2   flex gap-4 items-center">
+            <div className="w-full py-2   flex gap-4 justify-center">
               <button
                 className="btn-rounded-primary rounded-full flex items-center gap-2 md:text-sm lg:text-base"
                 onClick={() => {
@@ -77,7 +78,7 @@ const Cart = () => {
           </div>
 
           <Link href="/products">
-            <div className="btn-rounded-secondary text-sm mt-5">Explore</div>
+            <div className="btn-rounded-secondary text-sm mt-5 gb">Explore</div>
           </Link>
         </div>
       )}
