@@ -14,7 +14,7 @@ import {
   getcategories,
   getProduct,
 } from "@app/actions/serverActions";
-import { notify } from "@app/utils/notify";
+// import { notify } from "@app/utils/notify";
 
 export default function ProductsContextProvider({ children }) {
   const [state, dispatch] = useReducer(productsReducer, initialState);
@@ -53,11 +53,6 @@ export default function ProductsContextProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const getProductById = async (productId) => {
-  //   const product = await getProduct(productId);
-  //   return product;
-  // };
-
   const updateInCartOrInWish = (productId, type, value) => {
     if (productId) {
       dispatch({
@@ -66,7 +61,7 @@ export default function ProductsContextProvider({ children }) {
           item.id === productId ? { ...item, [type]: value } : item
         ),
       });
-      notify(notifyTypes.SUCCESS, "Product Added to Cart");
+      // notify(notifyTypes.SUCCESS, "Product Added to Cart");
     } else {
       dispatch({
         type: actionTypes.UPDATE_PRODUCTS,
@@ -76,7 +71,7 @@ export default function ProductsContextProvider({ children }) {
           qty: 0,
         })),
       });
-      notify(notifyTypes.SUCCESS, "Cart Emptied");
+      // notify(notifyTypes.SUCCESS, "Cart Emptied");
     }
   };
 
@@ -103,7 +98,7 @@ export default function ProductsContextProvider({ children }) {
     setAddressList(updatedList);
 
     localStorage.setItem("AddressList", JSON.stringify(addressList));
-    notify(notifyTypes.SUCCESS, "Address Succesfully Added");
+    // notify(notifyTypes.SUCCESS, "Address Succesfully Added");
   };
 
   const updateAddress = (addressId, updatedAddress) => {
@@ -111,24 +106,30 @@ export default function ProductsContextProvider({ children }) {
       item.id === addressId ? updatedAddress : item
     );
 
-    setAddressList(updatedList); // Assuming you have a setter function for addressList
+    setAddressList(updatedList);
 
     if (currentAddress.id === addressId) {
       setCurrentAddress(updatedAddress);
     }
+
     localStorage.setItem("AddressList", JSON.stringify(addressList));
-    notify(notifyTypes.SUCCESS, "Address Succesfully Updated");
+    // notify(notifyTypes.SUCCESS, "Address Succesfully Updated");
   };
 
-  const deleteAddress = (addressId) => {
-    const updatedList = addressList.filter(({ id }) => id !== addressId);
-    setAddressList(updatedList);
+  const deleteAddress = (removingAddress) => {
+    const addressId = removingAddress.id;
+    console.log(addressId);
+    const updatedList = addressList.filter(
+      (address) => address.id !== addressId
+    );
 
-    if (currentAddress.id === addressId) {
-      setCurrentAddress(addressList[0]);
+    setAddressList([...updatedList]);
+
+    if (currentAddress.id === addressId && updatedList.length > 0) {
+      setCurrentAddress(updatedList[0]);
     }
-    localStorage.setItem("AddressList", JSON.stringify(addressList));
-    notify(notifyTypes.SUCCESS, "Address Succesfully Deleted");
+
+    localStorage.setItem("AddressList", JSON.stringify(updatedList));
   };
 
   const isInWish = (productId) =>

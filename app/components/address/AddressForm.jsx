@@ -11,7 +11,6 @@ const AddressForm = ({
   setIsEdit,
   isEdit,
 }) => {
-  console.log(selectedAddress);
   const { addAddress, setCurrentAddress, updateAddress, deleteAddress } =
     useProductsContext();
   const [newAddress, setNewAddress] = useState(
@@ -161,7 +160,7 @@ const AddressForm = ({
             className="btn-rounded-primary text-sm text-red-600 "
             onClick={() => {
               setSelectedAddress(false);
-              deleteAddress(selectedAddress.id);
+              deleteAddress(selectedAddress);
             }}
           >
             <span className="hidden sm:inline">Remove</span>

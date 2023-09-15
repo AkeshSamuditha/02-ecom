@@ -13,7 +13,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 
 import { useCartContext } from "@app/contexts/index";
 import { LoginButton, LogoutButton } from "./UserButtons";
-import Search from "../search";
+// import Search from "../search";
 import MenuDropdown from "./MenuDropdown";
 import Logo from "./Logo";
 
@@ -58,7 +58,7 @@ const Navbar = () => {
           <Logo />
         </section>
         <div className="hidden sm:block sm:w-1/3 relative">
-          <Search />
+          {/* <Search /> */}
         </div>
 
         <section className="flex items-center">
@@ -76,13 +76,6 @@ const Navbar = () => {
               ) : (
                 <LoginButton />
               )}
-
-              {/* <BsBookmarkHeart /> */}
-              {/* {token && wishlist.length > 0 && (
-                <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-rose-600 border-2 border-[--theme-color] rounded-full -top-2 -right-2 ">
-                  {wishlist.length}
-                </div> */}
-              {/* )} */}
             </li>
             <li
               className="relative bg-yellow-500 text-white rounded-full hover:bg-yellow-800 cursor-pointer mx-2 transition shadow-sm flex items-center justify-center w-9 h-9"
@@ -106,9 +99,7 @@ const Navbar = () => {
         </section>
       </div>
 
-      <section className="mt-4 sm:hidden relative">
-        <Search />
-      </section>
+      <section className="mt-4 sm:hidden relative">{/* <Search /> */}</section>
     </nav>
   );
 };

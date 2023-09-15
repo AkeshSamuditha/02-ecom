@@ -86,7 +86,6 @@ const CartContextProvider = ({ children }) => {
 
   const deleteProductFromCart = (productId) => {
     const updateCart = cart.filter((cartItem) => cartItem.id !== productId);
-    console.log(updateCart);
     setCart(updateCart);
     localStorage.setItem("cart", JSON.stringify(updateCart));
   };
