@@ -7,7 +7,6 @@ import { getProduct } from "@app/actions/serverActions";
 import CartButton from "@app/components/buttons/cartButton";
 
 export default async function ProductDetails({ params: { id } }) {
-  console.log("I am at checkoutpage", id);
   const product = await getProduct(id);
 
   return (

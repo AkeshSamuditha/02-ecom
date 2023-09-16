@@ -40,13 +40,15 @@ model Order {
 }
 
 model Product {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  lastupdate  DateTime @updatedAt
+  createdate  DateTime @default(now())
   name        String
   description String
   price       Float
   quantity    Int
   image       String
-  isfeatured  Boolean @default(false)
+  isfeatured  Boolean  @default(false)
 
   category String
 }

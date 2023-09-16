@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { useProductsContext } from "@app/contexts";
 import { v4 as uuid } from "uuid";

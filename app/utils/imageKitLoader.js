@@ -1,5 +1,3 @@
-"use client";
-
 export default function imageKitLoader({ src, width, quality }) {
   if (src[0] === "/") src = src.slice(1);
   const params = [`w-${width}`];
@@ -11,4 +9,4 @@ export default function imageKitLoader({ src, width, quality }) {
   if (urlEndpoint[urlEndpoint.length - 1] === "/")
     urlEndpoint = urlEndpoint.substring(0, urlEndpoint.length - 1);
   return `${urlEndpoint}/${src}?tr=${paramsString}`;
-};
+}

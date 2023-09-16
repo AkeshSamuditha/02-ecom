@@ -1,7 +1,8 @@
-import toast, { Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 export const notify = (type, message) => {
   if (type === "success") {
+    console.log("success");
     toast.success(message, {
       position: "bottom-center",
     });

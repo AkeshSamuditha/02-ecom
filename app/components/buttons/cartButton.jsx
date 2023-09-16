@@ -4,17 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import toast, { Toaster } from "react-hot-toast";
-
+import { notify } from "@app/utils/notify";
 import { useCartContext } from "@app/contexts";
-
-const notify = () => {
-  console.log(toast);
-  toast.success("Successfully created!", {
-    duration: 4000,
-    position: "bottom-center",
-  });
-};
 
 const CartButton = ({ product }) => {
   const navigate = useRouter();
@@ -28,7 +19,7 @@ const CartButton = ({ product }) => {
     addProductToCart(product);
     setInCart(!inCart);
     console.log("added to cart");
-    notify();
+    notify("success", "added to cart");
   };
 
   const removeFromCart = () => {

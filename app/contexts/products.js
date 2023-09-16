@@ -118,18 +118,20 @@ export default function ProductsContextProvider({ children }) {
 
   const deleteAddress = (removingAddress) => {
     const addressId = removingAddress.id;
-    console.log(addressId);
-    const updatedList = addressList.filter(
-      (address) => address.id !== addressId
+    // const updatedList = addressList.filter(
+    //   (address) => address.id !== addressId
+    // );
+
+    console.log(addressList);
+    setAddressList((prevAddressList) =>
+      prevAddressList.filter((address) => address.id !== addressId)
     );
 
-    setAddressList([...updatedList]);
-
-    if (currentAddress.id === addressId && updatedList.length > 0) {
-      setCurrentAddress(updatedList[0]);
-    }
-
-    localStorage.setItem("AddressList", JSON.stringify(updatedList));
+    // if (currentAddress.id === addressId && updatedList.length > 0) {
+    //   setCurrentAddress(updatedList[0]);
+    // }
+    console.log(addressList);
+    localStorage.setItem("AddressList", JSON.stringify(addressList));
   };
 
   const isInWish = (productId) =>
