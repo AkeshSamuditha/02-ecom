@@ -19,7 +19,7 @@ export async function getProduct(id) {
 export async function getProducts() {
   try {
     const products = await prisma.product.findMany();
-    return products;
+    // return products;
     const sortedProducts = products.sort((a, b) => {
       const dateA = new Date(a.lastupdate);
       const dateB = new Date(b.lastupdate);
