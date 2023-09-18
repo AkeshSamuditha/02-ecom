@@ -19,6 +19,7 @@ export async function getProduct(id) {
 export async function getProducts() {
   try {
     const products = await prisma.product.findMany();
+
     const sortedProducts = products.sort((a, b) => {
       const dateA = new Date(a.lastupdate);
       const dateB = new Date(b.lastupdate);
@@ -26,9 +27,11 @@ export async function getProducts() {
       // Compare the Date objects
       return dateA - dateB;
     });
+    console.log(sortedProducts);
 
     return sortedProducts;
   } catch (err) {
+    console.log(err);
     throw new Error("Something went wrong!");
   }
 }
@@ -120,6 +123,16 @@ export async function deleteProduct(id) {
     return product;
 
     //have to implement the method to delete picture from imagekit server
+  } catch (err) {
+    console.log(err);
+    return;
+  }
+}
+
+export async function getOrders() {
+  try {
+    const orders = await prisma.order.findMany();
+    return orders;
   } catch (err) {
     console.log(err);
     return;
