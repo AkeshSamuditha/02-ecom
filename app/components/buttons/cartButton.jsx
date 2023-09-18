@@ -28,12 +28,12 @@ const CartButton = ({ product }) => {
   };
 
   return (
-    <div>
+    <div className="hover:scale-105 transform transition disabled:cursor-not-allowed">
       {inCart ? (
         <button
           disabled={disableCart}
           className="btn-rounded-secondary flex items-center justify-center gap-2 text-base 
-              hover:scale-105 transform transition disabled:cursor-not-allowed"
+              "
           onClick={() => {
             removeFromCart();
           }}
