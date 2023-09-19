@@ -13,6 +13,7 @@ import CartContextProvider from "@app/contexts/cartContext";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { Toaster } from "react-hot-toast";
 config.autoAddCss = false;
 
 const sans = Josefin_Sans({
@@ -65,6 +66,7 @@ export default function RootLayout({ children }) {
                 <div className="px-[4%] md:px-[10%] pb-2">
                   <Navbar />
                   <div className="pt-32 sm:pt-20 min-h-[80vh]">{children}</div>
+                  <Toaster />
                 </div>
               </section>
             </CartContextProvider>

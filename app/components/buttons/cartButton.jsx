@@ -18,13 +18,14 @@ const CartButton = ({ product }) => {
   const addToCart = () => {
     addProductToCart(product);
     setInCart(!inCart);
-    console.log("added to cart");
+    // console.log("added to cart");
     notify("success", "added to cart");
   };
 
   const removeFromCart = () => {
     deleteProductFromCart(product.id);
     setInCart(!inCart);
+    notify("success", "removed from the cart");
   };
 
   return (

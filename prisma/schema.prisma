@@ -26,11 +26,13 @@ model User {
 }
 
 model Order {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  amount       Int
-  checkoutdate DateTime @default(now())
-  status       String
-  payment      String
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  accepteddata DateTime?
+  delivereddta DateTime?
+  amount       Float
+  checkoutdate DateTime  @default(now())
+  status       String?
+  payment      String?
   address      Address
 
   products CartItem[]
