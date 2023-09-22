@@ -7,7 +7,14 @@ Techlogies used
  Prisma as the ORM
 
 
+Quickstart
 
+Download the Repo
+Add the following environement path varibales to the env file
+
+
+
+then
 
 npm run dev and 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
