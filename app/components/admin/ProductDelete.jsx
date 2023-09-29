@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteProduct } from "@app/actions/serverActions";
 import Image from "next/image";
+
 const ProductDelete = (product) => {
   const modalStyles = {
     position: "fixed",
@@ -40,10 +41,10 @@ const ProductDelete = (product) => {
 
   return (
     <div
-      className="mr-2 text-center cursor-pointer"
+      className="text-center cursor-pointer"
       onClick={() => setIsModalOpen(!isModalOpen)}
     >
-      <FontAwesomeIcon icon={faTrash} size="lg" style={{ color: "#da2525" }} />
+      <FontAwesomeIcon icon={faTrash} className="text-sm text-red-700 hover:text-red-600" />
       {isModalOpen && (
         <>
           <div
@@ -67,24 +68,23 @@ const ProductDelete = (product) => {
               <h1>Do you want keep {product.name}?</h1>
               <div className="flex justify-center mt-4">
                 <button
-                  className="btn btn-red mr-2 hover:scale-125 px-5"
+                  className="btn btn-red mr-2 rounded-lg hover:shadow-md px-5"
                   onClick={() => deleteProduct(product.id)}
                 >
-                  <FontAwesomeIcon
-                    icon={faCircleCheck}
-                    style={{ color: "#169914" }}
-                  />
-                  Yes
+                  <FontAwesomeIcon className=" text-green-700"
+                    icon={faCircleCheck}/>
+                    <span className="ml-2">Yes</span>
                 </button>
-                <button
-                  className="btn btn-default hover:scale-125"
-                  onClick={() => setIsModalOpen(!isModalOpen)}
+                <button className="btn btn-default px-5 rounded-lg hover:shadow-md"
+                 onClick={() => setIsModalOpen(!isModalOpen)}
                 >
                   <FontAwesomeIcon
                     icon={faCircleXmark}
-                    style={{ color: "#de2121" }}
-                  />{" "}
+                    className="text-red-700"
+                  />
+                  <span className="ml-2">
                   NO
+                  </span>
                 </button>
               </div>
             </div>

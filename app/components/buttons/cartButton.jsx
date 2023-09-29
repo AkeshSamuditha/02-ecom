@@ -18,7 +18,6 @@ const CartButton = ({ product }) => {
   const addToCart = () => {
     addProductToCart(product);
     setInCart(!inCart);
-    // console.log("added to cart");
     notify("success", "added to cart");
   };
 

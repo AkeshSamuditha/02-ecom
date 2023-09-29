@@ -28,7 +28,9 @@ const SummaryCard = ({ setShowModal }) => {
       <hr />
       <div className="flex justify-between items-center">
         <p className=" text-gray-600">Total</p>
-        <p className="text-xl text-zinc-900">Rs. {totalPriceOfCart}</p>
+        <p className="text-xl text-zinc-900">
+          Rs. {totalPriceOfCart.toFixed(2)}
+        </p>
       </div>
       <div className="w-full py-2   flex gap-4 items-center">
         <button

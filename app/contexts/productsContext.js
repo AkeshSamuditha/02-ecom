@@ -76,7 +76,6 @@ export default function ProductsContextProvider({ children }) {
   };
 
   const applyFilters = (filterType, filterValue) => {
-    console.log(filterType, filterValue);
     dispatch({
       type: filterTypes.FILTERS,
       payload: { filterType, filterValue },
@@ -122,7 +121,7 @@ export default function ProductsContextProvider({ children }) {
     //   (address) => address.id !== addressId
     // );
 
-    console.log(addressList);
+    // console.log(addressList);
     setAddressList((prevAddressList) =>
       prevAddressList.filter((address) => address.id !== addressId)
     );
@@ -130,7 +129,7 @@ export default function ProductsContextProvider({ children }) {
     // if (currentAddress.id === addressId && updatedList.length > 0) {
     //   setCurrentAddress(updatedList[0]);
     // }
-    console.log(addressList);
+    // console.log(addressList);
     localStorage.setItem("AddressList", JSON.stringify(addressList));
   };
 

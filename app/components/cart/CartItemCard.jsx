@@ -5,12 +5,15 @@ import { useRouter } from "next/navigation";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 import { useCartContext } from "@app/contexts/index";
+import { notify } from "@app/utils/notify";
 
 const CartItemCard = ({ product, isSearch, setSearch }) => {
   const navigate = useRouter();
 
   const { updateProductQtyInCart, deleteProductFromCart, disableCart } =
     useCartContext();
+
+
 
   return (
     <div
@@ -52,7 +55,11 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
                     className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md  text-xs disabled:cursor-not-allowed"
                     disabled={disableCart}
                     onClick={() =>
-                      updateProductQtyInCart(product.id, "decrement")
+                      {const response = updateProductQtyInCart(product.id, "decrement")
+                      if (response.message){
+                        notify("error", "Product is out of stock")
+                      }
+                    }
                     }
                   >
                     <AiOutlineMinus />
@@ -64,7 +71,10 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
                     className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs disabled:cursor-not-allowed"
                     disabled={disableCart}
                     onClick={() =>
-                      updateProductQtyInCart(product.id, "increment")
+                      {const response =  updateProductQtyInCart(product.id, "increment")
+                      if (response.message){
+                        notify("error", "Product is out of stock")
+                      }}
                     }
                   >
                     <AiOutlinePlus />

@@ -11,6 +11,7 @@ import { Filters, SingleProduct, SortBy } from "../../components";
 
 const ProductListing = () => {
   const productsList = useFilter();
+  // console.log(productsList);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [showScrollArrow, setShowScrollArrow] = useState(false);
@@ -21,12 +22,6 @@ const ProductListing = () => {
       behavior: "smooth",
     });
   };
-
-  // useEffect(() => {
-  //   if (location.state?.from === "category") {
-  //     setIsFilterOpen(false);
-  //   }
-  // }, []);
 
   useEffect(() => {
     const toggleShowArrow = () => {

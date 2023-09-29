@@ -2,6 +2,7 @@
 
 import prisma from "@app/lib/prisma";
 import uploadFile from "@app/utils/imageKitUploader";
+import { revalidatePath } from "next/cache";
 
 export async function getProduct(id) {
   try {
@@ -25,14 +26,12 @@ export async function getProducts() {
       const dateB = new Date(b.lastupdate);
 
       // Compare the Date objects
-      return dateA - dateB;
+      return dateB - dateA;
     });
-    console.log(sortedProducts);
-
     return sortedProducts;
   } catch (err) {
     console.log(err);
-    throw new Error("Something went wrong!");
+    throw new Error({ message: "Something went wrong!" });
   }
 }
 
@@ -70,6 +69,7 @@ export async function createProduct(data) {
         isfeatured: isFeatured,
       },
     });
+    revalidatePath("/admin/products")
     return product;
   } catch (err) {
     console.log(err);
@@ -106,6 +106,7 @@ export async function updateProduct(data) {
         isfeatured: isFeatured,
       },
     });
+    revalidatePath("/admin/products")
     return product;
   } catch (err) {
     console.log(err);
@@ -120,6 +121,8 @@ export async function deleteProduct(id) {
         id: id,
       },
     });
+
+    revalidatePath("/admin/products")
     return product;
 
     //have to implement the method to delete picture from imagekit server

@@ -53,7 +53,7 @@ export default function Nav() {
               href={item.href}
               className="flex items-end justify-end px-4 py-4 odd:bg-orange-500 even:bg-orange-400 rounded-r-md mt-2 mr-2 "
             >
-              <div className="text-lg px-3 text-center ">{item.text}</div>
+              <div className="text-lg px-2 text-center ">{item.text}</div>
               <FontAwesomeIcon
                 icon={item.icon}
                 className={`text-2xl ${

@@ -10,7 +10,7 @@ const PriceDetailsCard = ({
     { label: "Total Items", value: totalItems },
     {
       label: "Subtotal",
-      value: `Rs. ${totalPriceOfCart}`,
+      value: `Rs. ${totalPriceOfCart.toFixed(2)}`,
     },
     // {
     //   label: "Discount",
@@ -25,7 +25,7 @@ const PriceDetailsCard = ({
   return summaryData.map(({ label, value }) => (
     <div key={label} className=" flex justify-between items-center p-0 ">
       <p className=" text-gray-600">{label}</p>
-      <p className="text-lg">{value}</p>
+      <p className="text-lg">{value.toFixed(2)}</p>
     </div>
   ));
 };

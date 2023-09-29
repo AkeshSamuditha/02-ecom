@@ -1,13 +1,11 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
 import { useCartContext } from "../../contexts";
-import { useProductsContext } from "../../contexts";
 
 import CartItemCard from "../../components/cart/CartItemCard";
 import PriceCard from "../../components/cart/PriceCard";
