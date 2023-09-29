@@ -11,16 +11,16 @@ const TrendingCard = ({ product }) => {
 
   return (
     <div
-      className={`flex flex-col px-4 mb-8 item-center justify-center transition-transform relative ${
+      className={`flex flex-col px-4 mb-8 item-center justify-start transition-transform relative ${
         isHovered ? "scale-110" : ""
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link href={`/products/${product.id}`}>
-        <div className="flex justify-center">
-          <PiShootingStarThin style={{ color: "gold", fontSize: "30px" }} />
-          <h1 className="text-lg text-center  text-yellow-500 border-b border-yellow-500">
+        <div className="flex justify-center items-start text-yellow-800">
+          <PiShootingStarThin className="text-3xl" />
+          <h1 className="text-lg text-center ml-2   border-b border-yellow-500">
             {product.name}
           </h1>
         </div>
