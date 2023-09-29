@@ -1,27 +1,21 @@
-npm run dev
-
-# or
-
-yarn dev
-
-# or
-
-pnpm dev
-
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Techlogies used
+ Next Js
+ Vanilla JS
+ Next auth for authentication
+ Imagekit io for Image hsting
+ MongoDB as the Database
+ Prisma as the ORM
 
 
-rafce
-npm install prisma --save-dev
-npx prisma init
-npm install @prisma/client
-aat
+Quickstart
+
+Download the Repo
+Add the following environement path varibales to the env file
 
 
 
-npx prisma generate #to generate
+then
 
-npm run devStart #for Nodemon
-```
+npm run dev and Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+npm run decStart to do changes to the database
+
