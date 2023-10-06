@@ -3,6 +3,8 @@ import React from "react";
 import Image from "next/image";
 import { getProduct } from "@app/actions/serverActions";
 import { useEffect, useState } from "react";
+import { notify } from "@app/utils/notify";
+import { notifyTypes } from "@app/utils/actiontypes";
 
 const ItemCard = ({ product }) => {
   const [item, setItem] = useState(null);
@@ -19,7 +21,7 @@ const ItemCard = ({ product }) => {
           quantity: product.quantity,
         });
       } catch (error) {
-        console.error("Error fetching product:", error);
+        notify(notifyTypes.ERROR, error.message);
       }
     };
 

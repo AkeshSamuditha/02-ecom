@@ -6,14 +6,13 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 import { useCartContext } from "@app/contexts/index";
 import { notify } from "@app/utils/notify";
+import { notifyTypes } from "@app/utils/actiontypes";
 
 const CartItemCard = ({ product, isSearch, setSearch }) => {
   const navigate = useRouter();
 
   const { updateProductQtyInCart, deleteProductFromCart, disableCart } =
     useCartContext();
-
-
 
   return (
     <div
@@ -54,13 +53,16 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
                   <button
                     className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md  text-xs disabled:cursor-not-allowed"
                     disabled={disableCart}
-                    onClick={() =>
-                      {const response = updateProductQtyInCart(product.id, "decrement")
-                      if (response.message){
-                        notify("error", "Product is out of stock")
+                    onClick={() => {
+                      const response = updateProductQtyInCart(
+                        product.id,
+                        "decrement"
+                      );
+
+                      if (response.message) {
+                        notify(notifyTypes.ERROR, "Product is out of stock");
                       }
-                    }
-                    }
+                    }}
                   >
                     <AiOutlineMinus />
                   </button>
@@ -70,12 +72,16 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
                   <button
                     className="bg-[--primary-text-color] p-1 text-gray-100 rounded-md text-xs disabled:cursor-not-allowed"
                     disabled={disableCart}
-                    onClick={() =>
-                      {const response =  updateProductQtyInCart(product.id, "increment")
-                      if (response.message){
-                        notify("error", "Product is out of stock")
-                      }}
-                    }
+                    onClick={() => {
+                      const response = updateProductQtyInCart(
+                        product.id,
+                        "increment"
+                      );
+
+                      if (response.message) {
+                        notify("error", "Product is out of stock");
+                      }
+                    }}
                   >
                     <AiOutlinePlus />
                   </button>
@@ -84,7 +90,10 @@ const CartItemCard = ({ product, isSearch, setSearch }) => {
                   <button
                     className="btn-rounded-secondary bg-gradient-to-r from-red-400 to-red-500 text-white text-xs sm:text-sm mt-2 max-w-xs border-none disabled:cursor-not-allowed font-bold "
                     disabled={disableCart}
-                    onClick={() => deleteProductFromCart(product.id)}
+                    onClick={() => {
+                      deleteProductFromCart(product.id);
+                      notify(notifyTypes.SUCCESS, "Product removed from cart");
+                    }}
                   >
                     Remove from Cart
                   </button>

@@ -63,12 +63,12 @@ const CartContextProvider = ({ children }) => {
     const cartItem = cart.find((cartItem) => cartItem.id === productId);
     const product = await getProduct(productId);
 
-    if (!product){
+    if (!product) {
       deleteProductFromCart(productId);
-      return new Error({message : "Product not found"});
+      return new Error({ message: "Product not found" });
     }
     if (type === "increment" && cartItem.quantity >= product.quantity) {
-      return alert("You can't add more than available quantity");
+      return new Error({ message: "You only can add this" });
     }
 
     if (type === "decrement" && cartItem.quantity === 1) {
