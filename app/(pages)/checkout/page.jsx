@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import SummaryCard from "@app/components/checkout/SummaryCard";
 import Address from "@app/components/address/Address";
-import Modal from "@app/components/checkout/Modal";
 
 
 const Checkout = () => {
