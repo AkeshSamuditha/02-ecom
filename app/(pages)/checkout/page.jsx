@@ -15,11 +15,11 @@ const Checkout = () => {
     <>
       <div className="md:min-h-[80vh] flex justify-center items-center py-3">
         <main className="grid md:grid-cols-2 gap-10 w-full">
-          <Modal
+          {/* <Modal
             showModal={showModal}
             setShowModal={setShowModal}
             setIsOrderPlaced={setIsOrderPlaced}
-          />
+          /> */}
           <section className="p-7 rounded-md shadow-sm bg-white/[0.7] flex flex-col gap-6 w-full h-min">
             <Address />
           </section>
