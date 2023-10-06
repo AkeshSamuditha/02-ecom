@@ -29,7 +29,7 @@
      ```
      Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-   - To make changes to the database, edit the `/prisma/seed.js` file amd run:
+   - To make changes to the database, edit the `/prisma/seed.js` file and run:
      ```sh
      npm run devStart
      ```
