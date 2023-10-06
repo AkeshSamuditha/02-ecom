@@ -14,6 +14,8 @@ const TrendingCard = ({ product }) => {
       className={`flex flex-col px-4 mb-8 item-center justify-start transition-transform relative ${
         isHovered ? "scale-110" : ""
       }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <Link href={`/products/${product.id}`}>
         <div className="flex justify-center items-start text-yellow-800">
