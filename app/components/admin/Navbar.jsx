@@ -13,7 +13,7 @@ const menuItems = [
   {
     text: "New Product",
     icon: faPlus,
-    href: "/admin/products/new",
+    href: "/admin/new",
     matchPath: "new",
   },
   {

@@ -1,9 +1,9 @@
 import AuthProvider from "@app/components/providers/AuthProvider";
 import AdminLogo from "@app/components/admin/AdminLogo";
 import Footer from "@app/components/Footer";
+import Navbar from "@app/components/admin/Navbar";
 
-import Nav from "@app/components/admin/Nav";
-
+//main Layout to be used in admin pages
 export default function AdminLayout({ children }) {
   return (
     <>
@@ -11,7 +11,7 @@ export default function AdminLayout({ children }) {
           <section>
             <div className="px-[4%] md:px-[10%] pb-2">
               <AdminLogo />
-              <Nav />
+              <Navbar />
               <div className="pt-32 sm:pt-20 min-h-[80vh]">{children}
               </div>
               <Footer />

@@ -12,7 +12,7 @@ import { MdOutlineExplore } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 import { useCartContext } from "@app/contexts/index";
-import { LoginButton, LogoutButton } from "./UserButtons";
+import { LoginButton, LogoutButton } from "../buttons/UserButtons";
 // import Search from "../search";
 import MenuDropdown from "./MenuDropdown";
 import Logo from "./Logo";

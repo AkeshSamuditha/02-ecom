@@ -1,12 +1,9 @@
 import React from "react";
-import Image from "next/image";
-import { useCartContext, useProductsContext } from "@app/contexts";
+import { useCartContext } from "@app/contexts";
 import PriceDetailsCard from "./PriceDetailsCard";
 import ItemCard from "./itemCard";
-// import { notify } from "../../utils/utils";
 
-const SummaryCard = ({ setShowModal }) => {
-  const { addressList, currentAddress } = useProductsContext();
+const SummaryCard = () => {
   const { cart, totalPriceOfCart } = useCartContext();
 
   const totalItems = cart.reduce((count, product) => {
@@ -36,14 +33,6 @@ const SummaryCard = ({ setShowModal }) => {
         <button
           onClick={() => {
             //Direct to Payment Gateway
-            // if (
-            //   addressList.length === 0 ||
-            //   Object.keys(currentAddress).length === 0
-            // ) {
-            //   notify("warn", "Please Select or Add an Address.");
-            // } else {
-            //   setShowModal(true);
-            // }
           }}
           className="btn-rounded-primary rounded-full flex items-center gap-2 md:text-sm lg:text-base"
         >

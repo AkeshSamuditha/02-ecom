@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
 
@@ -85,7 +85,6 @@ export default function ProductForm({
     //imageFile is the actual file that is send to the server
     const base64 = await toBase64(file);
     setImageFile(base64);
-    console.log("image changed", imageFile);
   };
 
   return (
@@ -236,6 +235,8 @@ export default function ProductForm({
   );
 }
 
+
+// submit button is extracted out to seperate component to facilitate the handling of useFormStatus 
 function SubmitButton() {
   const { pending } = useFormStatus();
   const router = useRouter();

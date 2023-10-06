@@ -1,3 +1,5 @@
+// Not implemented yet. Can Implement as Request
+
 import { useProductsContext } from "../../contexts/index";
 
 const Checkbox = ({ data }) => {
@@ -7,13 +9,6 @@ const Checkbox = ({ data }) => {
   } = useProductsContext();
 
   const checkboxHandler = (e) => {
-    // let catArr = categories;
-    // if (e.target.checked) {
-    //   catArr.push(e.target.value);
-    // } else {
-    //   catArr = catArr.filter((cat) => cat !== e.target.value);
-    // }
-    // applyFilters(e.target.name, catArr);
   };
   return (
     <label className="capitalize cursor-pointer">

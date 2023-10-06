@@ -9,8 +9,8 @@ const layout = ({ children }) => {
         <Image
           src="bannerHero.jpg"
           alt="Banner Image"
-          height={600}
-          width={1000}
+          height={800}
+          width={1300}
           className="w-full h-100% object-cover"
           priority={true}
         />

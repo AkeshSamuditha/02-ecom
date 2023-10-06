@@ -8,7 +8,6 @@ import {
   faCheckCircle,
   faTimesCircle,
   faPenToSquare,
-  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import ProductDelete from "@app/components/admin/ProductDelete";
 

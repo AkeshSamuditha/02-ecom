@@ -1,6 +1,8 @@
 import React from "react";
 import { useProductsContext } from "../../contexts/index";
+
 const InputRadioType2 = ({ data }) => {
+  
   const {
     applyFilters,
     filters: { gender },

@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useReducer, useState } from "react";
-import { useProductsContext } from "./index";
+import { useEffect, useState } from "react";
 import { getProduct } from "@app/actions/serverActions";
-// import { notify } from "../../utils/utils";
 
 import CartProvider from "../components/providers/cartProvider";
 

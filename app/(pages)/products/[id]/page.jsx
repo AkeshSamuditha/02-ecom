@@ -3,16 +3,19 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
 
-import { getProduct } from "@app/actions/serverActions";
+import { getProduct, getProducts } from "@app/actions/serverActions";
 import CartButton from "@app/components/buttons/cartButton";
+import RandomProducts from "@app/components/products/RandomProducts";
+
 
 export default async function ProductDetails({ params: { id } }) {
   const product = await getProduct(id);
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 p-20">
+    <>
+    <div className="flex justify-center items-center p-4">
       <main className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-16 max-w-screen-xl">
-        <section className=" rounded-lg shadow-md flex items-center justify-center">
+        <section className=" rounded-lg  flex items-center justify-center">
           <Image
             src={product.image}
             alt="Sample image"
@@ -21,7 +24,7 @@ export default async function ProductDetails({ params: { id } }) {
             className="rounded-xl w-full h-full object-cover transition-transform hover:scale-110"
           />
         </section>
-        <section className="p-8 bg-white bg-opacity-70 rounded-md shadow-md flex flex-col gap-2 justify-center">
+        <section className="p-8 rounded-md  flex flex-col gap-2 justify-center">
           <div className="flex flex-col gap-2">
             <h1 className="text-4xl sm:text-4xl lg:text-5xl font-bold text-center uppercase tracking-wide">
               {product?.name}
@@ -50,7 +53,10 @@ export default async function ProductDetails({ params: { id } }) {
             <CartButton product={product} />
           </div>
         </section>
-      </main>
-    </div>
+        </main>
+        </div>
+        <br />
+        <RandomProducts />
+      </>
   );
 }

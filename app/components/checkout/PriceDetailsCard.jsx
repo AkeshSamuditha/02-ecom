@@ -1,21 +1,13 @@
 const PriceDetailsCard = ({
   totalItems,
   totalPriceOfCart,
-  // totalPriceOfCartProducts,
 }) => {
-  // totalItems = 5;
-  // totalPriceOfCart = 1000;
-  // totalPriceOfCartProducts = 900;
   const summaryData = [
     { label: "Total Items", value: totalItems },
     {
       label: "Subtotal",
       value: `Rs. ${totalPriceOfCart.toFixed(2)}`,
     },
-    // {
-    //   label: "Discount",
-    //   value: `-Rs${totalPriceOfCart - totalPriceOfCartProducts}`,
-    // },
     {
       label: "Delivery Charges",
       value: "Free",

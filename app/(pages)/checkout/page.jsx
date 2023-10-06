@@ -1,28 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useLocation, useRouter } from "next/navigation";
+import { useState } from "react";
 
 import SummaryCard from "@app/components/checkout/SummaryCard";
 import Address from "@app/components/address/Address";
 import Modal from "@app/components/checkout/Modal";
 
-import { useCartContext } from "@app/contexts/index";
 
 const Checkout = () => {
-  const navigate = useRouter();
-  const { cart } = useCartContext();
 
   const [showModal, setShowModal] = useState(false);
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
-  // const location = useLocation();
-  // console.log(location);
-
-  // useEffect(() => {
-  //   if (location?.state !== "cart" || !cart.length) {
-  //     navigate.push("/");
-  //   }
-  // }, [cart.length, location?.state, navigate]);
 
   return (
     <>

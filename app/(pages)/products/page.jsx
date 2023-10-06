@@ -11,7 +11,6 @@ import { Filters, SingleProduct, SortBy } from "../../components";
 
 const ProductListing = () => {
   const productsList = useFilter();
-  // console.log(productsList);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [showScrollArrow, setShowScrollArrow] = useState(false);

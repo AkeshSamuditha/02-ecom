@@ -12,7 +12,6 @@ const InputRange = () => {
     <>
       <h2 className="text-xl mb-4">
         Price Range:
-        {/* <span className="text-lg"> 0 - Rs. {priceRange}</span> */}
       </h2>
       <label>
         <input

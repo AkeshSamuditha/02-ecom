@@ -1,9 +1,13 @@
 "use client";
-import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import Link from "next/link";
+
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+
+import { notify } from "@app/utils/notify";
+import { notifyTypes } from "@app/utils/actiontypes";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -41,14 +45,17 @@ const SignUpPage = () => {
       });
       if (!response.ok) {
         setSigningUp(false);
-        throw new Error(response.statusText);
+        notify(notifyTypes.ERROR, "Check your credentials");
       }
 
+      notify(notifyTypes.SUCCESS, "Account Created Successfully");
       router.push("/login", {
         sucess: "Account Created Successfully",
       });
+
     } catch (error) {
       setError(true);
+      notify(notifyTypes.ERROR, "Something went wrong");
     } finally {
       setSigningUp(false);
     }
@@ -166,11 +173,10 @@ const SignUpPage = () => {
                 {signingUp ? "Signing up..." : "Create Account"}
               </button>
               <p className="text-gray-600 text-sm">
-                Already have an account?{" "}
+                Already have an account?
                 <Link
                   href="/login"
-                  className="underline text-base
-            "
+                  className="underline text-base"
                 >
                   Login
                 </Link>
@@ -180,41 +186,6 @@ const SignUpPage = () => {
         </div>
       </section>
     </div>
-
-    // <div>
-    //   <form className="flex" onSubmit={signInHandler}>
-    //     <input
-    //       type="text"
-    //       name="firstName"
-    //       placeholder="First Name"
-    //       required
-    // onChange={(e) => setUser({ ...user, firstName: e.target.value })}
-    //     />
-    //     <input
-    //       type="text"
-    //       name="lastName"
-    //       placeholder="Last Name"
-    //       required
-    //       onChange={(e) => setUser({ ...user, lastName: e.target.value })}
-    //     />
-    //     <input
-    //       type="email"
-    //       name="email"
-    //       placeholder="Email"
-    //       required
-    //       onChange={(e) => setUser({ ...user, email: e.target.value })}
-    //     />
-    //     <input
-    //       type="password"
-    //       name="password"
-    //       placeholder="********"
-    //       required
-    //     ></input>
-    //     <button type="submit">Sign Up</button>
-    //   </form>
-    //   {err && <p>Something Went Wrong</p>}
-    //   <Link href="/login">Already have an account? Login</Link>
-    // </div>
   );
 };
 

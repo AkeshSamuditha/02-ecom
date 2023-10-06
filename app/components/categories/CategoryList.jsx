@@ -14,7 +14,6 @@ const CategoryList = ({ catRef }) => {
         className="grid  grid-cols-1  md:grid-cols-2    gap-4  py-4 mt-1"
         ref={catRef}
       >
-        {" "}
         {categoryList.map((categoryItem) => (
           <CategoryCard key={categoryItem.id} category={categoryItem} />
         ))}

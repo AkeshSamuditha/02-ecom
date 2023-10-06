@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getProducts } from "@app/actions/serverActions";
 import Image from "next/image";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
@@ -8,6 +8,7 @@ import {
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { getProducts } from "@app/actions/serverActions";
 import ProductDelete from "@app/components/admin/ProductDelete";
 
 export default async function Products() {

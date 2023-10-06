@@ -1,6 +1,7 @@
 "use client";
+
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -10,6 +11,8 @@ import {
 import { deleteProduct } from "@app/actions/serverActions";
 import Image from "next/image";
 
+
+//used a modal to delete the product
 const ProductDelete = (product) => {
   const modalStyles = {
     position: "fixed",
@@ -59,7 +62,7 @@ const ProductDelete = (product) => {
               <Image
                 height={280}
                 width={200}
-                src={product.image} // Assuming you have an image URL in your product data
+                src={product.image}
                 alt={product.name}
                 className="w-max h-max object-cover rounded-md mr-4 "
               />

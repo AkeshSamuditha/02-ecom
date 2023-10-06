@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { BsBookmarkHeart } from "react-icons/bs";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
-import { MiniLoginButton, MiniLogoutButton } from "./UserButtons";
+import { MiniLoginButton, MiniLogoutButton } from "../buttons/UserButtons";
 
 const MenuDropdown = () => {
   const router = useRouter();

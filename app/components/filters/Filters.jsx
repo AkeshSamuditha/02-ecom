@@ -1,18 +1,21 @@
 import { AiOutlineClose } from "react-icons/ai";
 import Checkbox from "./Checkbox";
 import InputRange from "./InputRange";
-import InputRadio from "./InputRadio";
 import InputRadioType2 from "./InputRadioType2";
 import { useProductsContext } from "../../contexts/index";
+import { useEffect } from "react";
 
 const collectionsList = ["Summer", "Winter", "Spring", "Autumn"];
 
-const categoryList = ["all", "Gents", "Ladies"];
 
 const FilterHeading = ({ text }) => <h2 className="text-xl mb-4">{text}</h2>;
 
 const Filters = ({ isFilterOpen, setIsFilterOpen }) => {
-  const { clearFilters } = useProductsContext();
+  const { clearFilters, categoryList } = useProductsContext();
+
+  useEffect(() => {
+    categoryList.unshift({name: "All" })
+    }, [categoryList])
 
   return (
     <aside
@@ -39,12 +42,11 @@ const Filters = ({ isFilterOpen, setIsFilterOpen }) => {
         <FilterHeading text="Categories" />
         <div className="grid grid-rows-2 grid-cols-2 gap-2">
           {categoryList.map((data, index) => (
-            <InputRadioType2 data={data} key={index} />
+            <InputRadioType2 data={data.name} key={index} />
           ))}
         </div>
       </section>
       <section className="py-3">
-        {/* <FilterHeading text="Price Range" /> */}
         <InputRange />
       </section>
       <section className="py-3">
@@ -55,13 +57,6 @@ const Filters = ({ isFilterOpen, setIsFilterOpen }) => {
           ))}
         </div>
       </section>
-
-      {/* <section className="py-3 flex flex-col gap-2">
-        <FilterHeading text="Rating" />
-        {ratings.map((data, index) => (
-          <InputRadio data={data} key={index} name="rating" />
-        ))}
-      </section> */}
     </aside>
   );
 };

@@ -4,17 +4,13 @@ import { useEffect, useReducer, useState } from "react";
 import { initialState, productsReducer } from "../reducers/productsReducer";
 import {
   actionTypes,
-  addressTypes,
   filterTypes,
-  notifyTypes,
 } from "../utils/actiontypes";
-import ProductProvider from "/app/components/providers/productsProvider.jsx";
+import ProductProvider from "/app/components/providers/productsProvider.js";
 import {
   getProducts,
   getcategories,
-  getProduct,
 } from "@app/actions/serverActions";
-// import { notify } from "@app/utils/notify";
 
 export default function ProductsContextProvider({ children }) {
   const [state, dispatch] = useReducer(productsReducer, initialState);
@@ -48,6 +44,7 @@ export default function ProductsContextProvider({ children }) {
           ? JSON.parse(localStorage.getItem("AddressList"))
           : []
       );
+
       setLoadingProducts(false);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

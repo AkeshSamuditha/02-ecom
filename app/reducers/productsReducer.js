@@ -35,17 +35,6 @@ export const productsReducer = (state, action) => {
         allProducts: action.payload,
       };
 
-    // case actionTypes.INITIALIZE_WISHLIST:
-    //   return { ...state, wishlist: action.payload };
-
-    // case actionTypes.ADD_PRODUCT_TO_WISHLIST:
-    //   return { ...state, wishlist: action.payload };
-
-    // case actionTypes.DELETE_PRODUCTS_FROM_WISHLIST:
-    //   return {
-    //     ...state,
-    //     wishlist: action.payload,
-    //   };
     case filterTypes.FILTERS:
       return {
         ...state,

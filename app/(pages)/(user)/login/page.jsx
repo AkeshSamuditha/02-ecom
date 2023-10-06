@@ -1,8 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
+
 import Link from "next/link";
+
+import { notify } from "@app/utils/notify";
+import { notifyTypes } from "@app/utils/actiontypes";
 
 const SignInPage = () => {
   const searchParams = useSearchParams();
@@ -22,28 +26,39 @@ const SignInPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!email) {
+      notify(notifyTypes.ERROR, "Email is required");
+      return;
+    }
+
+    if (!password) {
+      notify(notifyTypes.ERROR, "Password is required");
+      return;
+    }
+
     try {
       setLoading(true);
-      setEmail("");
-      setPassword("");
-
+      
       const result = await signIn("credentials", {
         email,
         password,
         redirect: false,
         callbackUrl,
       });
-      setLoading;
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+      
       if (result?.error) {
         setLoading(false);
-        setError("Invalid email or password");
+        notify(notifyTypes.ERROR, "Invalid email or password")
       }
       if (result?.ok) {
         router.push("/profile");
       }
     } catch (error) {
       setLoading(false);
-      setError(error.message);
+      notify(notifyTypes.ERROR, "Invalid email or password")
     }
   };
 
@@ -92,15 +107,6 @@ const SignInPage = () => {
                 >
                   {loading ? "Logging In..." : "Login"}
                 </button>
-                {/* <button
-                  className="btn-secondary w-2/3 text-sm md:text-base text-center"
-                  onClick={() => {
-                    setPassword("test");
-                    setEmail("test@test.com");
-                  }}
-                >
-                  Login as a Guest
-                </button> */}
                 <Link href="/signup" className="underline text-gray-600">
                   Create New Account
                 </Link>
@@ -109,41 +115,6 @@ const SignInPage = () => {
           </div>
         </section>
       </div>
-      // <div>
-      //   <form
-      //     className="p-2 border-2 border-gray-500 rounded-lg"
-      //     onSubmit={handleSubmit}
-      //   >
-      //     <h1>Sign In</h1>
-      //     {!!error && <p className="text-error">ERROR: {error}</p>}
-      //     <input
-      //       type="text"
-      //       className="p-2 border-2 border-gray-500 rounded-lg"
-      //       placeholder="email"
-      //       value={email}
-      //       onChange={(e) => {
-      //         setEmail(e.target.value);
-      //       }}
-      //     />
-      //     <input
-      //       type="password"
-      //       className="p-2 border-2 border-gray-500 rounded-lg"
-      //       placeholder="**********"
-      //       value={password}
-      //       onChange={(e) => {
-      //         setPassword(e.target.value);
-      //       }}
-      //     />
-      //     <button className="btn" type="submit">
-      //       Sign In
-      //     </button>
-      //   </form>
-      //   <div>
-      //     <div>
-      //       <Link href="/signup">Signup Here</Link>
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 };

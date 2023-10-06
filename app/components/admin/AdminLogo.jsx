@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { LogoutButton } from "../navbar/UserButtons";
+import { LogoutButton } from "../buttons/UserButtons";
 
 const AdminLogo = () => {
   const [colorChange, setColorChange] = useState(false);

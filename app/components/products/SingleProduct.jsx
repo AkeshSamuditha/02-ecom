@@ -1,30 +1,10 @@
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
-import { GiRoundStar } from "react-icons/gi";
 import Image from "next/image";
-import { BsBookmarkHeart, BsFillBookmarkHeartFill } from "react-icons/bs";
-import {
-  // useAuthContext,
-  useCartContext,
-  useProductsContext,
-  // useWishlistContext,
-} from "../../contexts";
 import Link from "next/link";
 import CartButton from "../buttons/cartButton";
 
-// import { useLocation } from "react-router";
-// import { notify } from "../../utils/utils";
 
+// Single Product Component at the explore page
 const SingleProduct = ({ product }) => {
-  const location = usePathname();
-  const token = useSession();
-  const { addProductToCart, disableCart, isInCart } = useCartContext();
-  // const { addProductToWishlist, deleteProductFromWishlist, disableWish } =
-  //   useWishlistContext();
-  const navigate = useRouter();
-  let inCart = isInCart(product.id);
-
   return (
     <>
       <div
@@ -33,33 +13,26 @@ const SingleProduct = ({ product }) => {
       transition-transform
       hover:scale-[1.02] hover:shadow-lg"
       >
+        <Link href={`/products/${product.id}`}>
         <div
-          // className="flex items-center justify-center p-10 xs:p-5 sm:p-10 bg-black/[0.075] h-1/2 xs:h-full sm:h-1/2 xs:w-1/2 w-full sm:w-full"
           className="flex items-center justify-center xs:p-5  bg-black/[0.075]  xs:w-1/2 w-full sm:w-full"
-          onClick={() => {
-            navigate.push(`/products/${product.id}`);
-          }}
         >
           <Image
             src={product.image}
-            alt="Sample image"
+            alt="Product Image"
             width={150}
             height={200}
-            className="w-full  h-full object-cover xs:object-contain sm:object-contain"
-          />
+            className="w-full h-full object-cover xs:object-contain sm:object-contain"
+            />
         </div>
+            </Link>
 
-        <div className="p-3 flex flex-col justify-between gap-2 mt-2 h-1/2 xs:h-full sm:h-1/2 xs:w-2/3 w-full sm:w-full">
-          <Link href={`/products/${product.id}`}>
+        <div className="p-3 flex flex-col gap-2 mt-2 h-1/2 xs:h-full sm:h-1/2 xs:w-2/3 w-full sm:w-full">
             <div>
               <div className=" flex justify-between">
                 <div className="flex flex-col">
                   <span className="text-xl font-medium">{product.name}</span>
                   <span className="flex items-center gap-1">
-                    {/* <span>{product.rating}</span> */}
-
-                    {/* <GiRoundStar className=" text-yellow-400 mb-1" /> */}
-                    {/* <span className="text-xs text-gray-400">Rating</span> */}
                   </span>
                 </div>
 
@@ -69,33 +42,9 @@ const SingleProduct = ({ product }) => {
                   </span>
                 </div>
               </div>
-              {/* <p className="text-sm text-gray-600">{product.brand}</p> */}
             </div>
-          </Link>
           <div className="w-full pt-2 border-t flex justify-center items-center">
             <CartButton product={product} />
-            {/* <button
-            disabled={false} //{disableWish}
-            className="disabled:cursor-not-allowed"
-            onClick={() => {
-              if (!token) {
-                navigate.push("/login", { state: { from: location.pathname } });
-                notify("warn", "Please Login to continue");
-              } else {
-                if (product?.inWish) {
-                  deleteProductFromWishlist(product.id);
-                } else {
-                  addProductToWishlist(product);
-                }
-              }
-            }}
-            >
-            {product.inWish ? (
-              <BsFillBookmarkHeartFill className="text-xl text-rose-600 hover:shadow-md transition" />
-              ) : (
-                <BsBookmarkHeart className="text-xl hover:text-rose-600 hover:shadow-md transition" />
-                )}
-              </button> */}
           </div>
         </div>
       </div>

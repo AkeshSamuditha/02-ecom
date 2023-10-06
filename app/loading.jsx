@@ -1,4 +1,3 @@
-import React from "react";
 const Loader = () => {
   return (
     <div className="text-loader flex flex-col gap-1 items-center">
