@@ -10,7 +10,7 @@ const MenuDropdown = () => {
   const router = useRouter();
   const session = useSession();
   return (
-    <div className="absolute right-0 z-10  bg-amber-50 font-semibold rounded-lg shadow w-max  overflow-hidden transition-all">
+    <div className="absolute right-0 z-10  w-max overflow-hidden rounded-lg bg-amber-50 font-semibold  shadow transition-all">
       <ul className="text-sm  ">
         <li>
           {session.status === "authenticated" ? (
@@ -21,7 +21,7 @@ const MenuDropdown = () => {
         </li>
         <li onClick={() => router.push("/cart")}>
           <span className="flex items-center px-5 py-3 hover:bg-amber-100 ">
-            <HiOutlineShoppingBag className="text-lg me-3" /> Cart
+            <HiOutlineShoppingBag className="me-3 text-lg" /> Cart
           </span>
         </li>
       </ul>

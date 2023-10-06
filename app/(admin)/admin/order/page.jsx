@@ -15,16 +15,16 @@ export default async function Orders() {
   const orders = await getOrders();
   return (
     <>
-      <table className="rounded-lg text-xl justify-center  overflow-hidden table-auto w-full border-collapse mt-4">
-        <thead className="bg-slate-800 text-white text-center">
+      <table className="mt-4 w-full table-auto  border-collapse justify-center overflow-hidden rounded-lg text-xl">
+        <thead className="bg-slate-800 text-center text-white">
           <tr>
-            <th className="py-4 px-2">Last Updated</th>
-            <th className="py-4 px-2 border border-white">Product</th>
-            <th className="py-4 px-2 border border-white">Category</th>
-            <th className="py-4 px-2 border border-white">Quantity</th>
-            <th className="py-4 px-2 border border-white">Featured</th>
-            <th className="py-4 px-2 border border-white">Price(Rs.)</th>
-            <th className="py-4 px-2">Actions</th>
+            <th className="px-2 py-4">Last Updated</th>
+            <th className="border border-white px-2 py-4">Product</th>
+            <th className="border border-white px-2 py-4">Category</th>
+            <th className="border border-white px-2 py-4">Quantity</th>
+            <th className="border border-white px-2 py-4">Featured</th>
+            <th className="border border-white px-2 py-4">Price(Rs.)</th>
+            <th className="px-2 py-4">Actions</th>
           </tr>
         </thead>
 
@@ -32,9 +32,9 @@ export default async function Orders() {
           {orders.map((product) => (
             <tr
               key={product.id}
-              className="border-b odd:bg-slate-200 rounded-lg "
+              className="rounded-lg border-b odd:bg-slate-200 "
             >
-              <td className="text-center shadow-b">{product.lastupdate}</td>
+              <td className="shadow-b text-center">{product.lastupdate}</td>
 
               <td className="px-4 py-2 ">
                 <Link href={"/orders/" + product.id}>
@@ -44,7 +44,7 @@ export default async function Orders() {
                       alt={product.name}
                       width={100}
                       height={150}
-                      className="w-20 h-30 object-cover rounded-md mr-4"
+                      className="h-30 mr-4 w-20 rounded-md object-cover"
                     />
                     <div>
                       <h3 className="font-semibold">{product.name}</h3>
@@ -53,24 +53,24 @@ export default async function Orders() {
                   </div>
                 </Link>
               </td>
-              <td className="text-center shadow-b">{product.category}</td>
+              <td className="shadow-b text-center">{product.category}</td>
               <td className="text-center  ">{product.quantity}</td>
               <td className="text-center">
                 {product.isfeatured ? (
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-green-500 text-xl"
+                    className="text-xl text-green-500"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faTimesCircle}
-                    className="text-red-500 text-xl"
+                    className="text-xl text-red-500"
                   />
                 )}
               </td>
               <td className="text-center ">{product.price.toFixed(2)}</td>
               <td className=" px-4 py-2   ">
-                <div className="flex flex-col item-center gap-3">
+                <div className="item-center flex flex-col gap-3">
                   <div className=" mr-2  text-center">
                     <Link href={"/admin/orders/edit/" + product.id}>
                       <FontAwesomeIcon

@@ -13,7 +13,7 @@ export const filterByCategory = (selectedcategory, data) => {
   } else {
     return data.filter(
       ({ category }) =>
-        category.toLowerCase() === selectedcategory.toLowerCase()
+        category.toLowerCase() === selectedcategory.toLowerCase(),
     );
   }
 };
@@ -24,11 +24,10 @@ export const filterByPriceRange = (selectedRange, data) => {
     : data;
 };
 
-
 export const filterByCheckbox = (selectedCategories, data) => {
   return selectedCategories.length
     ? data.filter(({ category }) =>
-        selectedCategories.includes(category.toLowerCase())
+        selectedCategories.includes(category.toLowerCase()),
       )
     : data;
 };

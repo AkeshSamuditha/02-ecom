@@ -10,9 +10,7 @@ const InputRange = () => {
 
   return (
     <>
-      <h2 className="text-xl mb-4">
-        Price Range:
-      </h2>
+      <h2 className="mb-4 text-xl">Price Range:</h2>
       <label>
         <input
           type="range"
@@ -21,10 +19,10 @@ const InputRange = () => {
           step="2"
           name="priceRange"
           value={priceRange}
-          className="w-full accent-[--primary-text-color] cursor-pointer"
+          className="w-full cursor-pointer accent-[--primary-text-color]"
           onChange={(e) => applyFilters(e.target.name, e.target.value)}
         />
-        <div className="w-full flex justify-between p-0">
+        <div className="flex w-full justify-between p-0">
           <span>0</span>
           <span>{Math.floor(maxRange / 2)}</span>
           <span>{maxRange}</span>

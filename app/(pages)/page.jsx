@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false); // Set isLoading to false after the delay
-    }, 2000); 
+    }, 2000);
   }, []);
   return (
     <>

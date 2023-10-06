@@ -11,7 +11,6 @@ import {
 import { deleteProduct } from "@app/actions/serverActions";
 import Image from "next/image";
 
-
 //used a modal to delete the product
 const ProductDelete = (product) => {
   const modalStyles = {
@@ -44,10 +43,13 @@ const ProductDelete = (product) => {
 
   return (
     <div
-      className="text-center cursor-pointer"
+      className="cursor-pointer text-center"
       onClick={() => setIsModalOpen(!isModalOpen)}
     >
-      <FontAwesomeIcon icon={faTrash} className="text-sm text-red-700 hover:text-red-600" />
+      <FontAwesomeIcon
+        icon={faTrash}
+        className="text-sm text-red-700 hover:text-red-600"
+      />
       {isModalOpen && (
         <>
           <div
@@ -56,7 +58,7 @@ const ProductDelete = (product) => {
           ></div>
           <div
             style={modalStyles}
-            className="flex-row items-center justify-center cursor-default"
+            className="cursor-default flex-row items-center justify-center"
           >
             <div>
               <Image
@@ -64,30 +66,31 @@ const ProductDelete = (product) => {
                 width={200}
                 src={product.image}
                 alt={product.name}
-                className="w-max h-max object-cover rounded-md mr-4 "
+                className="mr-4 h-max w-max rounded-md object-cover "
               />
             </div>
-            <div className="text-center item-between">
+            <div className="item-between text-center">
               <h1>Do you want keep {product.name}?</h1>
-              <div className="flex justify-center mt-4">
+              <div className="mt-4 flex justify-center">
                 <button
-                  className="btn btn-red mr-2 rounded-lg hover:shadow-md px-5"
+                  className="btn btn-red mr-2 rounded-lg px-5 hover:shadow-md"
                   onClick={() => deleteProduct(product.id)}
                 >
-                  <FontAwesomeIcon className=" text-green-700"
-                    icon={faCircleCheck}/>
-                    <span className="ml-2">Yes</span>
+                  <FontAwesomeIcon
+                    className=" text-green-700"
+                    icon={faCircleCheck}
+                  />
+                  <span className="ml-2">Yes</span>
                 </button>
-                <button className="btn btn-default px-5 rounded-lg hover:shadow-md"
-                 onClick={() => setIsModalOpen(!isModalOpen)}
+                <button
+                  className="btn btn-default rounded-lg px-5 hover:shadow-md"
+                  onClick={() => setIsModalOpen(!isModalOpen)}
                 >
                   <FontAwesomeIcon
                     icon={faCircleXmark}
                     className="text-red-700"
                   />
-                  <span className="ml-2">
-                  NO
-                  </span>
+                  <span className="ml-2">NO</span>
                 </button>
               </div>
             </div>

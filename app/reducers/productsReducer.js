@@ -20,7 +20,7 @@ export const productsReducer = (state, action) => {
     case actionTypes.INITIALIZE_PRODUCTS:
       const maxValue = action.payload.reduce(
         (acc, { price }) => (acc > price ? acc : price),
-        0
+        0,
       );
       return {
         ...state,

@@ -1,11 +1,9 @@
-const PriceDetailsCard = ({
-  totalItems,
-  totalPriceOfCart,
-}) => {
+const PriceDetailsCard = ({ totalItems, totalPriceOfCart }) => {
   const summaryData = [
-    { 
-      label: "Total Items", 
-      value: totalItems },
+    {
+      label: "Total Items",
+      value: totalItems,
+    },
     {
       label: "Subtotal",
       value: `Rs. ${totalPriceOfCart.toFixed(2)}`,
@@ -17,7 +15,7 @@ const PriceDetailsCard = ({
   ];
 
   return summaryData.map(({ label, value }) => (
-    <div key={label} className=" flex justify-between items-center p-0 ">
+    <div key={label} className=" flex items-center justify-between p-0 ">
       <p className=" text-gray-600">{label}</p>
       <p className="text-lg">{value}</p>
     </div>

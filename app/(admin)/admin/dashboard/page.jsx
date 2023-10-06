@@ -5,11 +5,11 @@ import Image from "next/image";
 export default function Home() {
   const { data: session } = useSession();
   return (
-    <div className="text-blue-900 flex justify-between">
+    <div className="flex justify-between text-blue-900">
       <h2>
         Hello, <b>{session?.user?.name}</b>
       </h2>
-      <div className="flex bg-gray-300 gap-1 text-black rounded-lg overflow-hidden">
+      <div className="flex gap-1 overflow-hidden rounded-lg bg-gray-300 text-black">
         {/* <Image
           src={session?.user?.image}
           alt=""

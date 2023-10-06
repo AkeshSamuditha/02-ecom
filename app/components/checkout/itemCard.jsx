@@ -34,12 +34,12 @@ const ItemCard = ({ product }) => {
 
   return (
     <div
-      className="flex flex-col gap-2 shadow-sm px-4 py-2 rounded-sm "
+      className="flex flex-col gap-2 rounded-sm px-4 py-2 shadow-sm "
       key={item.id}
     >
-      <div className="flex  items-center flex-wrap gap-2 w-full">
+      <div className="flex      w-full flex-wrap items-center gap-2">
         <div className="flex flex-1 items-center gap-2">
-          <div className=" bg-black/[0.075] h-16 w-16 rounded-md flex items-center">
+          <div className=" flex h-16 w-16 items-center rounded-md bg-black/[0.075]">
             <Image
               src={item.image}
               alt=""

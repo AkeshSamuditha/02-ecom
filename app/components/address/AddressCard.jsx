@@ -15,29 +15,29 @@ const AddressCard = ({
     <label
       className={`flex ${
         id === currentAddress?.id && isEdit ? "bg-gray-100" : "bg-gray-50"
-      }  items-center gap-2 shadow-sm p-4 rounded-sm cursor-pointer`}
+      }  cursor-pointer items-center gap-2 rounded-sm p-4 shadow-sm`}
     >
       {showInput && (
         <input
           type="radio"
           name="address"
           id=""
-          className="accent-current me-2"
+          className="me-2 accent-current"
           checked={id === currentAddress?.id}
           onChange={() => setCurrentAddress(address)}
         />
       )}
       <div>
-        <h3 className="text-lg font-semibold break-all">{fullname}</h3>
-        <p className="text-sm text-gray-500 break-all">
+        <h3 className="break-all text-lg font-semibold">{fullname}</h3>
+        <p className="break-all text-sm text-gray-500">
           {flat},{area}
         </p>
-        <p className="text-sm text-gray-500 break-all">
+        <p className="break-all text-sm text-gray-500">
           {city},{pincode}
         </p>
         <p className="text-sm text-gray-500">
           Mobile:
-          <span className="font-semibold ps-1 break-all">{mobile}</span>
+          <span className="break-all ps-1 font-semibold">{mobile}</span>
         </p>
       </div>
     </label>

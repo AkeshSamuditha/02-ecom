@@ -2,14 +2,13 @@ import React from "react";
 import { useProductsContext } from "../../contexts/index";
 
 const InputRadioType2 = ({ data }) => {
-  
   const {
     applyFilters,
     filters: { gender },
   } = useProductsContext();
   return (
     <label
-      className={`p-2 rounded-md  shadow-sm text-center capitalize ${
+      className={`rounded-md p-2  text-center capitalize shadow-sm ${
         gender === data
           ? "bg-[--primary-text-color] text-white "
           : "bg-black/[0.1] hover:bg-[--primary-text-color] hover:text-white"

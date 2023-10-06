@@ -25,7 +25,7 @@ const AddressForm = ({
           area: "",
           city: "",
           pincode: "",
-        }
+        },
   );
   const submitHandler = (e) => {
     e.preventDefault();
@@ -44,16 +44,16 @@ const AddressForm = ({
   return (
     <form
       action=""
-      className="flex flex-col gap-3 p-5 bg-gray-50 shadow-sm"
+      className="flex flex-col gap-3 bg-gray-50 p-5 shadow-sm"
       onSubmit={submitHandler}
     >
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex flex-wrap gap-2">
         <label className="flex flex-1 flex-col">
           Full Name
           <input
             required
             type="text"
-            className="border rounded-md p-1.5 shadow-sm"
+            className="rounded-md border p-1.5 shadow-sm"
             onChange={(e) =>
               setNewAddress({ ...newAddress, fullname: e.target.value })
             }
@@ -65,7 +65,7 @@ const AddressForm = ({
           <input
             required
             type="number"
-            className="border rounded-md p-1.5 shadow-sm"
+            className="rounded-md border p-1.5 shadow-sm"
             onChange={(e) =>
               setNewAddress({ ...newAddress, mobile: e.target.value })
             }
@@ -78,7 +78,7 @@ const AddressForm = ({
         <input
           required
           type="text"
-          className="border rounded-md p-1.5 shadow-sm"
+          className="rounded-md border p-1.5 shadow-sm"
           onChange={(e) =>
             setNewAddress({ ...newAddress, flat: e.target.value })
           }
@@ -90,20 +90,20 @@ const AddressForm = ({
         <input
           required
           type="text"
-          className="border rounded-md p-1.5 shadow-sm"
+          className="rounded-md border p-1.5 shadow-sm"
           onChange={(e) =>
             setNewAddress({ ...newAddress, area: e.target.value })
           }
           value={newAddress.area}
         />
       </label>
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex flex-wrap gap-2">
         <label className="flex flex-1 flex-col">
           Town/City
           <input
             required
             type="text"
-            className="border rounded-md p-1.5 shadow-sm"
+            className="rounded-md border p-1.5 shadow-sm"
             onChange={(e) =>
               setNewAddress({ ...newAddress, city: e.target.value })
             }
@@ -115,7 +115,7 @@ const AddressForm = ({
           <input
             required
             type="number"
-            className="border rounded-md p-1.5 shadow-sm"
+            className="rounded-md border p-1.5 shadow-sm"
             onChange={(e) =>
               setNewAddress({ ...newAddress, pincode: e.target.value })
             }
@@ -124,10 +124,10 @@ const AddressForm = ({
         </label>
       </div>
 
-      <div className="flex flex-Column items-center gap-2 py-2 justify-center">
+      <div className="flex-Column flex items-center justify-center gap-2 py-2">
         <button
           type="button"
-          className="btn-rounded-secondary rounded-full flex items-center gap-2 text-sm"
+          className="btn-rounded-secondary flex items-center gap-2 rounded-full text-sm"
           onClick={() => {
             setShowAddressForm(false);
             setNewAddress({
@@ -149,7 +149,7 @@ const AddressForm = ({
         </button>
         <button
           type="submit"
-          className="btn-rounded-primary rounded-full flex items-center gap-2 text-sm"
+          className="btn-rounded-primary flex items-center gap-2 rounded-full text-sm"
         >
           <span className="hidden sm:inline">Save</span>
           <span className="sm:hidden">

@@ -24,7 +24,7 @@ const CartContextProvider = ({ children }) => {
   useEffect(() => {
     const newTotalPrice = cart.reduce(
       (acc, { quantity, price }) => acc + quantity * price,
-      0
+      0,
     );
     setTotalPriceOfCart(newTotalPrice);
   }, [cart]);
@@ -33,7 +33,7 @@ const CartContextProvider = ({ children }) => {
     setCart(
       localStorage.getItem("cart")
         ? JSON.parse(localStorage.getItem("cart"))
-        : []
+        : [],
     );
   };
 
@@ -63,9 +63,9 @@ const CartContextProvider = ({ children }) => {
     const cartItem = cart.find((cartItem) => cartItem.id === productId);
     const product = await getProduct(productId);
 
-    if (!product){
+    if (!product) {
       deleteProductFromCart(productId);
-      return new Error({message : "Product not found"});
+      return new Error({ message: "Product not found" });
     }
     if (type === "increment" && cartItem.quantity >= product.quantity) {
       return alert("You can't add more than available quantity");

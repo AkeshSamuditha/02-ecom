@@ -43,7 +43,7 @@ export default function Nav() {
     <div>
       <aside
         className={
-          "fixed flex-col gap-3  text-white shadow-l rounded-r-xl   overflow-hidden transition-all ease-in-out duration-500 -left-32 top-28 hover:-left-6"
+          "shadow-l fixed -left-32  top-28 flex-col gap-3   overflow-hidden rounded-r-xl text-white transition-all duration-500 ease-in-out hover:-left-6"
         }
       >
         <nav className="flex flex-col py-4 ">
@@ -51,9 +51,9 @@ export default function Nav() {
             <Link
               key={index}
               href={item.href}
-              className="flex items-end justify-end px-4 py-4 odd:bg-orange-500 even:bg-orange-400 rounded-r-md mt-2 mr-2 "
+              className="mr-2 mt-2 flex items-end justify-end rounded-r-md px-4 py-4 odd:bg-orange-500 even:bg-orange-400 "
             >
-              <div className="text-lg px-2 text-center ">{item.text}</div>
+              <div className="px-2 text-center text-lg ">{item.text}</div>
               <FontAwesomeIcon
                 icon={item.icon}
                 className={`text-2xl ${

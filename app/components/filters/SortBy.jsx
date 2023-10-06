@@ -12,7 +12,7 @@ const SortBy = () => {
         placeholder="Sort By"
         name="sortBy"
         value={sortBy}
-        className="w-max py-1 px-2 rounded-md cursor-pointer shadow-md   hover:shadow-lg "
+        className="w-max cursor-pointer rounded-md px-2 py-1 shadow-md   hover:shadow-lg "
         onChange={(e) => applyFilters("sortBy", e.target.value)}
       >
         <option value="low_to_high" className="Low_to_High">

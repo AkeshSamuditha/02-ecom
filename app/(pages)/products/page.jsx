@@ -45,10 +45,10 @@ const ProductListing = () => {
           width={1200}
           src="bannerHeader.jpg?updatedAt=1693002785315"
           alt="bannerImg"
-          className="rounded-md max-h-25 min-h-[10rem] object-cover"
+          className="max-h-25 min-h-[10rem] rounded-md object-cover"
         />
       </header>
-      <section className="py-3 flex flex-col md:flex-row gap-2 justify-between">
+      <section className="flex flex-col justify-between gap-2 py-3 md:flex-row">
         <h1 className="text-2xl font-bold">Pulse for You!</h1>
         <div className="flex items-center gap-2">
           <Filters
@@ -57,7 +57,7 @@ const ProductListing = () => {
           />
           <SortBy />
           <button
-            className={`flex py-1 px-2 rounded-md shadow-md items-center  gap-1 hover:bg-[--primary-text-color] hover:text-white hover:shadow-lg ${
+            className={`flex items-center gap-1 rounded-md px-2 py-1  shadow-md hover:bg-[--primary-text-color] hover:text-white hover:shadow-lg ${
               isFilterOpen ? "bg-[--primary-text-color] text-white" : ""
             }`}
             onClick={() => {
@@ -77,12 +77,12 @@ const ProductListing = () => {
           ))}
         </main>
       ) : (
-        <p className="font-sans text-4xl  font-bold uppercase  tracking-wide text-gray-300 text-center w-full py-32">
+        <p className="w-full py-32  text-center font-sans  text-4xl font-bold uppercase tracking-wide text-gray-300">
           Nothing to Show!
         </p>
       )}
       <button
-        className={` fixed bottom-10 bg-gray-800 right-2 p-2 rounded-full text-xl shadow-2xl transition-all delay-100 ease-in-out ${
+        className={` fixed bottom-10 right-2 rounded-full bg-gray-800 p-2 text-xl shadow-2xl transition-all delay-100 ease-in-out ${
           showScrollArrow ? "block" : "hidden"
         }`}
         onClick={scrollToTop}

@@ -2,15 +2,9 @@
 
 import { useEffect, useReducer, useState } from "react";
 import { initialState, productsReducer } from "../reducers/productsReducer";
-import {
-  actionTypes,
-  filterTypes,
-} from "../utils/actiontypes";
+import { actionTypes, filterTypes } from "../utils/actiontypes";
 import ProductProvider from "/app/components/providers/productsProvider.js";
-import {
-  getProducts,
-  getcategories,
-} from "@app/actions/serverActions";
+import { getProducts, getcategories } from "@app/actions/serverActions";
 
 export default function ProductsContextProvider({ children }) {
   const [state, dispatch] = useReducer(productsReducer, initialState);
@@ -42,7 +36,7 @@ export default function ProductsContextProvider({ children }) {
       setAddressList(
         localStorage.getItem("AddressList")
           ? JSON.parse(localStorage.getItem("AddressList"))
-          : []
+          : [],
       );
 
       setLoadingProducts(false);
@@ -55,7 +49,7 @@ export default function ProductsContextProvider({ children }) {
       dispatch({
         type: actionTypes.UPDATE_PRODUCTS,
         payload: state.allProducts.map((item) =>
-          item.id === productId ? { ...item, [type]: value } : item
+          item.id === productId ? { ...item, [type]: value } : item,
         ),
       });
       // notify(notifyTypes.SUCCESS, "Product Added to Cart");
@@ -85,7 +79,7 @@ export default function ProductsContextProvider({ children }) {
   };
 
   const trendingProducts = state.allProducts.filter(
-    (product) => product.isfeatured
+    (product) => product.isfeatured,
   );
 
   const addAddress = (newAddress) => {
@@ -99,7 +93,7 @@ export default function ProductsContextProvider({ children }) {
 
   const updateAddress = (addressId, updatedAddress) => {
     const updatedList = addressList.map((item) =>
-      item.id === addressId ? updatedAddress : item
+      item.id === addressId ? updatedAddress : item,
     );
 
     setAddressList(updatedList);
@@ -120,7 +114,7 @@ export default function ProductsContextProvider({ children }) {
 
     // console.log(addressList);
     setAddressList((prevAddressList) =>
-      prevAddressList.filter((address) => address.id !== addressId)
+      prevAddressList.filter((address) => address.id !== addressId),
     );
 
     // if (currentAddress.id === addressId && updatedList.length > 0) {

@@ -1,15 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { notify } from "@app/utils/notify";
 import { useCartContext } from "@app/contexts";
 
 const CartButton = ({ product }) => {
-  const navigate = useRouter();
-
   const { addProductToCart, disableCart, isInCart, deleteProductFromCart } =
     useCartContext();
 
@@ -28,7 +25,7 @@ const CartButton = ({ product }) => {
   };
 
   return (
-    <div className="hover:scale-105 transform transition disabled:cursor-not-allowed">
+    <div className="transform transition hover:scale-105 disabled:cursor-not-allowed">
       {inCart ? (
         <button
           disabled={disableCart}
@@ -46,8 +43,8 @@ const CartButton = ({ product }) => {
       ) : (
         <button
           disabled={disableCart}
-          className="btn-rounded-secondary flex items-center justify-center gap-2 text-base 
-            hover:bg-green-600 hover:text-white hover:border-none hover:scale-105 transform transition disabled:cursor-not-allowed"
+          className="btn-rounded-secondary flex transform items-center justify-center gap-2 
+            text-base transition hover:scale-105 hover:border-none hover:bg-green-600 hover:text-white disabled:cursor-not-allowed"
           onClick={() => {
             addToCart();
           }}

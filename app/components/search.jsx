@@ -59,7 +59,7 @@ const Search = () => {
         } text-sm transition`}
       >
         <input
-          className="w-full py-2 px-3 bg-transparent focus:outline-none"
+          className="w-full bg-transparent px-3 py-2 focus:outline-none"
           type="search"
           value={search}
           placeholder="Search Pulse"
@@ -68,9 +68,9 @@ const Search = () => {
         <CiSearch />
       </form>
       {search && showList && (
-        <ul className="absolute bg-amber-50 w-full max-h-72 overflow-auto rounded-b-md z-10">
+        <ul className="absolute z-10 max-h-72 w-full overflow-auto rounded-b-md bg-amber-50">
           {searching ? (
-            <li className="h-10 flex items-center justify-center">
+            <li className="flex h-10 items-center justify-center">
               <Image src={spinningLoaders} alt="Searching..." />
             </li>
           ) : filteredData.length ? (
@@ -86,7 +86,7 @@ const Search = () => {
               </li>
             ))
           ) : (
-            <li className="h-10 flex items-center justify-center">
+            <li className="flex h-10 items-center justify-center">
               no item to show
             </li>
           )}

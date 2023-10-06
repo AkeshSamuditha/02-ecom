@@ -10,20 +10,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-<>
-        <AuthProvider>
-          <ProductsProvider>
-            <CartContextProvider>
-              <section>
-                <div className="px-[4%] md:px-[10%] pb-2">
-                  <Navbar />
-                  <div className="pt-32 sm:pt-20 min-h-[80vh]">{children}
-                  </div>
-                </div>
-              </section>
-            </CartContextProvider>
-          </ProductsProvider>
-        </AuthProvider>
-        </>
+    <>
+      <AuthProvider>
+        <ProductsProvider>
+          <CartContextProvider>
+            <section>
+              <div className="px-[4%] pb-2 md:px-[10%]">
+                <Navbar />
+                <div className="min-h-[80vh] pt-32 sm:pt-20">{children}</div>
+              </div>
+            </section>
+          </CartContextProvider>
+        </ProductsProvider>
+      </AuthProvider>
+    </>
   );
 }

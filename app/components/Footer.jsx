@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="mx-auto py-10">
-        <p className="text-center text-s text-black">
+        <p className="text-s text-center text-black">
           &copy; 2023 Pulse. All rights reserved.
         </p>
       </div>

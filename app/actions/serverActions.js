@@ -69,7 +69,7 @@ export async function createProduct(data) {
         isfeatured: isFeatured,
       },
     });
-    revalidatePath("/admin/products")
+    revalidatePath("/admin/products");
     return product;
   } catch (err) {
     console.log(err);
@@ -106,7 +106,7 @@ export async function updateProduct(data) {
         isfeatured: isFeatured,
       },
     });
-    revalidatePath("/admin/products")
+    revalidatePath("/admin/products");
     return product;
   } catch (err) {
     console.log(err);
@@ -122,7 +122,7 @@ export async function deleteProduct(id) {
       },
     });
 
-    revalidatePath("/admin/products")
+    revalidatePath("/admin/products");
     return product;
 
     //have to implement the method to delete picture from imagekit server

@@ -90,9 +90,9 @@ export default function ProductForm({
   return (
     <form
       action={onSubmit}
-      className="flex-row max-w-xl mx-auto p-4 space-y-4 bg-gray-100 rounded-lg shadow-md"
+      className="mx-auto max-w-xl flex-row space-y-4 rounded-lg bg-gray-100 p-4 shadow-md"
     >
-      <label className="block text-xl text-center font-semibold text-primary">
+      <label className="text-primary block text-center text-xl font-semibold">
         Product Details
       </label>
 
@@ -103,7 +103,7 @@ export default function ProductForm({
           defaultValue={existingname}
           placeholder="Product name"
           required
-          className="rounded-lg px-3 py-2 border border-gray-300 focus:outline-none focus:ring focus:border-primary"
+          className="focus:border-primary rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring"
         />
       </div>
 
@@ -114,7 +114,7 @@ export default function ProductForm({
           defaultValue={existingDescription}
           placeholder="Description"
           required
-          className="rounded-lg px-3 py-2 border border-gray-300 focus:outline-none focus:ring focus:border-primary"
+          className="focus:border-primary rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring"
         />
       </div>
 
@@ -122,7 +122,7 @@ export default function ProductForm({
         name="category"
         defaultValue={assignedCategory}
         required
-        className="rounded-lg px-3 py-2 border border-gray-300 focus:outline-none focus:ring focus:border-primary text-gray-700"
+        className="focus:border-primary rounded-lg border border-gray-300 px-3 py-2 text-gray-700 focus:outline-none focus:ring"
       >
         <option value="" className="text-gray-400">
           Select a Category
@@ -132,7 +132,7 @@ export default function ProductForm({
             <option
               key={category.id}
               value={category.name}
-              className="text-gray-900 hover:bg-primary hover:text-white"
+              className="hover:bg-primary text-gray-900 hover:text-white"
             >
               {category.name}
             </option>
@@ -140,9 +140,9 @@ export default function ProductForm({
       </select>
 
       <div className="flex flex-col space-y-2">
-        <div className="flex flex-wrap gap-2 items-center">
+        <div className="flex flex-wrap items-center gap-2">
           {image ? (
-            <div className="relative p-2 rounded-md shadow-sm border border-gray-200">
+            <div className="relative rounded-md border border-gray-200 p-2 shadow-sm">
               <Image
                 width={300}
                 height={450}
@@ -152,13 +152,13 @@ export default function ProductForm({
               />
               <button
                 onClick={() => setImage(null)}
-                className="absolute top-0 right-0 p-1 m-1 bg-red-500 text-white rounded-full text-xs cursor-pointer"
+                className="absolute right-0 top-0 m-1 cursor-pointer rounded-full bg-red-500 p-1 text-xs text-white"
               >
                 <FontAwesomeIcon icon={faTrash} />
               </button>
             </div>
           ) : (
-            <label className="w-24 h-24 cursor-pointer text-center flex flex-col items-center justify-center text-sm text-primary rounded-md bg-white shadow-sm border border-primary hover:bg-slate-200">
+            <label className="text-primary border-primary flex h-24 w-24 cursor-pointer flex-col items-center justify-center rounded-md border bg-white text-center text-sm shadow-sm hover:bg-slate-200">
               <FontAwesomeIcon icon={faCloudUploadAlt} className="text-2xl" />
               <div>Add Image</div>
               <input
@@ -174,8 +174,8 @@ export default function ProductForm({
         </div>
       </div>
 
-      <div className="flex flex-row itemcenter space-x-2">
-        <label htmlFor="price" className="text-gray-600 text-center">
+      <div className="itemcenter flex flex-row space-x-2">
+        <label htmlFor="price" className="text-center text-gray-600">
           Price (in LKR):
         </label>
         <input
@@ -194,13 +194,13 @@ export default function ProductForm({
               setPrice(0);
             }
           }}
-          className="rounded-lg px-2 py-1  max-w-md border border-gray-300 focus:outline-none focus:ring focus:border-primary"
+          className="focus:border-primary max-w-md rounded-lg  border border-gray-300 px-2 py-1 focus:outline-none focus:ring"
           min="0"
         />
       </div>
 
       <div className="flex flex-row items-center justify-start ">
-        <label htmlFor="quantity" className="text-gray-600 text-center mr-3">
+        <label htmlFor="quantity" className="mr-3 text-center text-gray-600">
           Quantity:
         </label>
         <input
@@ -212,20 +212,20 @@ export default function ProductForm({
             const newValue = Math.max(0, ev.target.value); // Ensure non-negative value
             setQuantity(newValue);
           }}
-          className="rounded-lg px-2 py-1 max-w-xs border border-gray-300 focus:outline-none focus:ring focus:border-primary"
+          className="focus:border-primary max-w-xs rounded-lg border border-gray-300 px-2 py-1 focus:outline-none focus:ring"
           min="0"
         />
       </div>
 
       <div className="flex items-center space-x-2">
-        <label htmlFor="isFeatured" className="text-gray-700  text-lg">
+        <label htmlFor="isFeatured" className="text-lg  text-gray-700">
           Featured
         </label>
         <input
           type="checkbox"
           name="isFeatured"
           defaultChecked={existingIsFeatured}
-          className="text-primary h-5 w-5 focus:ring-primary border-gray-300 rounded-md cursor-pointer accent-orange-800"
+          className="text-primary focus:ring-primary h-5 w-5 cursor-pointer rounded-md border-gray-300 accent-orange-800"
         />
       </div>
       <div className="flex justify-center space-y-2">
@@ -235,8 +235,7 @@ export default function ProductForm({
   );
 }
 
-
-// submit button is extracted out to seperate component to facilitate the handling of useFormStatus 
+// submit button is extracted out to seperate component to facilitate the handling of useFormStatus
 function SubmitButton() {
   const { pending } = useFormStatus();
   const router = useRouter();
@@ -245,18 +244,18 @@ function SubmitButton() {
       {pending ? (
         <FontAwesomeIcon
           icon={faSpinner}
-          className="animate-spin text-xl cursor-none justify-center "
+          className="animate-spin cursor-none justify-center text-xl "
         />
       ) : (
         <div className="flex">
-          <div className="btn-rounded-secondary cursor-pointer font-bold  w-auto mr-2">
+          <div className="btn-rounded-secondary mr-2 w-auto  cursor-pointer font-bold">
             <button disabled={pending}>Submit</button>
           </div>
           <div>
             <button
               disabled={pending}
               onClick={() => router.back()}
-              className="btn-rounded-secondary font-bold py-2 px-4 rounded-full focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50 cursor-pointer"
+              className="btn-rounded-secondary cursor-pointer rounded-full px-4 py-2 font-bold focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50"
             >
               Cancel
             </button>

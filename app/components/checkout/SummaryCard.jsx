@@ -11,7 +11,7 @@ const SummaryCard = () => {
   }, 0);
 
   return (
-    <section className="py-3 md:py-7 px-5 md:px-7 lg:px-12 rounded-md shadow-sm bg-white/[0.7] flex flex-col gap-5 w-full h-min">
+    <section className="flex h-min w-full flex-col gap-5 rounded-md bg-white/[0.7] px-5 py-3 shadow-sm md:px-7 md:py-7 lg:px-12">
       <h1 className="text-2xl font-bold">Order Summary</h1>
       Items in Cart
       {cart.map((product) => (
@@ -23,18 +23,18 @@ const SummaryCard = () => {
         totalPriceOfCart={totalPriceOfCart}
       />
       <hr />
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <p className=" text-gray-600">Total</p>
         <p className="text-xl text-zinc-900">
           Rs. {totalPriceOfCart.toFixed(2)}
         </p>
       </div>
-      <div className="w-full py-2   flex gap-4 items-center">
+      <div className="flex w-full   items-center gap-4 py-2">
         <button
           onClick={() => {
             //Direct to Payment Gateway
           }}
-          className="btn-rounded-primary rounded-full flex items-center gap-2 md:text-sm lg:text-base"
+          className="btn-rounded-primary flex items-center gap-2 rounded-full md:text-sm lg:text-base"
         >
           Place Order
         </button>

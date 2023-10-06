@@ -18,7 +18,7 @@ export const MiniLoginButton = () => {
     <button onClick={signIn}>
       {
         <span className="flex items-center px-5 py-3 hover:bg-amber-100 ">
-          <RiAccountPinBoxLine className="text-lg me-3" /> Login
+          <RiAccountPinBoxLine className="me-3 text-lg" /> Login
         </span>
       }
     </button>
@@ -38,7 +38,7 @@ export const MiniLogoutButton = () => {
     <button onClick={signOut}>
       {
         <span className="flex items-center px-5 py-3 hover:bg-amber-100 ">
-          <RiAccountPinBoxLine className="text-lg me-3" /> Logout
+          <RiAccountPinBoxLine className="me-3 text-lg" /> Logout
         </span>
       }
     </button>

@@ -52,7 +52,6 @@ const SignUpPage = () => {
       router.push("/login", {
         sucess: "Account Created Successfully",
       });
-
     } catch (error) {
       setError(true);
       notify(notifyTypes.ERROR, "Something went wrong");
@@ -62,10 +61,10 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex items-center content-center  justify-center w-full px-5">
-      <section className="px-10 py-10 rounded-md shadow-md bg-white/[0.7] flex flex-col gap-6 w-full max-w-lg">
+    <div className="flex w-full content-center  items-center justify-center px-5">
+      <section className="flex w-full max-w-lg flex-col gap-6 rounded-md bg-white/[0.7] px-10 py-10 shadow-md">
         <div className="flex flex-col gap-2 ">
-          <h1 className="text-4xl font-bold mb-3">Sign up</h1>
+          <h1 className="mb-3 text-4xl font-bold">Sign up</h1>
           <form
             action=""
             className="flex flex-col gap-3 py-3 "
@@ -77,7 +76,7 @@ const SignUpPage = () => {
                 name="firstName"
                 required
                 placeholder="First Name*"
-                className="border rounded-md p-1.5 shadow-sm"
+                className="rounded-md border p-1.5 shadow-sm"
                 value={user.username}
                 onChange={(e) =>
                   setUser({ ...user, firstName: e.target.value })
@@ -90,7 +89,7 @@ const SignUpPage = () => {
                 required
                 name="lastName"
                 placeholder="Last Name*"
-                className="border rounded-md p-1.5 shadow-sm"
+                className="rounded-md border p-1.5 shadow-sm"
                 value={user.username}
                 onChange={(e) => setUser({ ...user, lastName: e.target.value })}
               />
@@ -101,18 +100,18 @@ const SignUpPage = () => {
                 name="email"
                 required
                 placeholder="Email*"
-                className="border rounded-md p-1.5 shadow-sm"
+                className="rounded-md border p-1.5 shadow-sm"
                 value={user.email}
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </label>
-            <label className="flex flex-col relative">
+            <label className="relative flex flex-col">
               <input
                 required
                 name="password"
                 placeholder="Password*"
                 type={showPassword.password ? "text" : "password"}
-                className="border rounded-md p-1.5 shadow-sm"
+                className="rounded-md border p-1.5 shadow-sm"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
               <span
@@ -127,13 +126,13 @@ const SignUpPage = () => {
                 {showPassword.password ? <AiFillEye /> : <AiFillEyeInvisible />}
               </span>
             </label>
-            <label className="flex flex-col relative">
+            <label className="relative flex flex-col">
               <input
                 required
                 name="confirmPassword"
                 placeholder="Confirm Password*"
                 type={showPassword.confirmPassword ? "text" : "password"}
-                className="border rounded-md p-1.5 shadow-sm"
+                className="rounded-md border p-1.5 shadow-sm"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -164,20 +163,17 @@ const SignUpPage = () => {
                 Password Mismatch
               </p>
             </label>
-            <div className="w-full py-2   flex flex-col gap-4 items-center">
+            <div className="flex w-full   flex-col items-center gap-4 py-2">
               <button
                 type="submit"
-                className="btn-primary w-2/3 text-lg text-center"
+                className="btn-primary w-2/3 text-center text-lg"
                 disabled={!isDisabled}
               >
                 {signingUp ? "Signing up..." : "Create Account"}
               </button>
-              <p className="text-gray-600 text-sm">
+              <p className="text-sm text-gray-600">
                 Already have an account?
-                <Link
-                  href="/login"
-                  className="underline text-base"
-                >
+                <Link href="/login" className="text-base underline">
                   Login
                 </Link>
               </p>

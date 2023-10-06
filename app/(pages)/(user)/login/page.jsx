@@ -38,7 +38,7 @@ const SignInPage = () => {
 
     try {
       setLoading(true);
-      
+
       const result = await signIn("credentials", {
         email,
         password,
@@ -48,17 +48,17 @@ const SignInPage = () => {
       setEmail("");
       setPassword("");
       setLoading(false);
-      
+
       if (result?.error) {
         setLoading(false);
-        notify(notifyTypes.ERROR, "Invalid email or password")
+        notify(notifyTypes.ERROR, "Invalid email or password");
       }
       if (result?.ok) {
         router.push("/profile");
       }
     } catch (error) {
       setLoading(false);
-      notify(notifyTypes.ERROR, "Invalid email or password")
+      notify(notifyTypes.ERROR, "Invalid email or password");
     }
   };
 
@@ -66,10 +66,10 @@ const SignInPage = () => {
     router.push("/");
   } else {
     return (
-      <div className="flex items-center justify-center w-full px-5">
-        <section className="px-7 py-10 rounded-md shadow-md bg-white/[0.7] flex flex-col gap-6 w-full max-w-lg">
+      <div className="flex w-full items-center justify-center px-5">
+        <section className="flex w-full max-w-lg flex-col gap-6 rounded-md bg-white/[0.7] px-7 py-10 shadow-md">
           <div className="flex flex-col gap-2">
-            <h1 className="text-3xl font-bold mb-3 ">Login to your account</h1>
+            <h1 className="mb-3 text-3xl font-bold ">Login to your account</h1>
 
             <form
               action=""
@@ -82,7 +82,7 @@ const SignInPage = () => {
                 Email
                 <input
                   type="email"
-                  className="border rounded-md p-1.5 shadow-sm"
+                  className="rounded-md border p-1.5 shadow-sm"
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -93,21 +93,21 @@ const SignInPage = () => {
                 Password
                 <input
                   type="password"
-                  className="border rounded-md p-1.5 shadow-sm"
+                  className="rounded-md border p-1.5 shadow-sm"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
                 />
               </label>
-              <div className="w-full py-2   flex flex-col gap-4 items-center ">
+              <div className="flex w-full   flex-col items-center gap-4 py-2 ">
                 <button
-                  className="btn-primary w-2/3 text-lg text-center "
+                  className="btn-primary w-2/3 text-center text-lg "
                   disabled={loading || !email || !password}
                 >
                   {loading ? "Logging In..." : "Login"}
                 </button>
-                <Link href="/signup" className="underline text-gray-600">
+                <Link href="/signup" className="text-gray-600 underline">
                   Create New Account
                 </Link>
               </div>

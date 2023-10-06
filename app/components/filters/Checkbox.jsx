@@ -8,12 +8,11 @@ const Checkbox = ({ data }) => {
     filters: { categories },
   } = useProductsContext();
 
-  const checkboxHandler = (e) => {
-  };
+  const checkboxHandler = (e) => {};
   return (
-    <label className="capitalize cursor-pointer">
+    <label className="cursor-pointer capitalize">
       <input
-        className="accent-[--primary-text-color] me-2 cursor-pointer"
+        className="me-2 cursor-pointer accent-[--primary-text-color]"
         type="checkbox"
         name="categories"
         // checked={categories.includes(data)}
