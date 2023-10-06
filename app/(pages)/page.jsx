@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Banner, CategoryList, Trending } from "../components";
 import Footer from "../components/Footer";
 
